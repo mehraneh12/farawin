@@ -4,9 +4,81 @@
     border: 0;
 }
  @font-face{
-    font-family:'iransansweb.ttf' ;
-    src: url("/fonts/iransansweb.ttf");
+    font-family:'fontawesome-webfont.ttf' ;
+    src: url("/fonts/fontawesome-webfont.ttf");
  }
  body{
-    
+    font-family:'fontawesome-webfont.ttf' ;
+    direction:rtl;
+    background:url(../images/1.jpeg)no-repeat  fixed;
+    -webkit-background-size:cover ;
+   
+ }
+  ::placeholder ,input ,span,button{
+    font-family:'Yekan-Bakh-FaNum-08-Fat.ttf';
+  }
+  .login{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+   
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+  }
+  .login h1{
+    color:#ffffff;
+    margin:20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #ffffff;
+    font-size:32px;
+    /* transition: 1s; */
+
+}
+/* .login h1:hover{
+   
+    padding-bottom: 9px;
+    font-size: 32px;
+} */
+.login input[type="text"],input[type="password"],span{
+    margin:20px;
+    padding:10px 14px;
+     width: 290px;
+     border-radius: 24px;
+     border:1px solid #d2dae2;
+     transition: 0.5s;
+     font-size:18px;
+}
+.login input[type="text"]:hover,input[type="password"]:hover{
+    width:330px;
+
+}
+.login input[type="text"]:focus,input[type="password"]:focus{
+    color: black;
+
+}
+::placeholder{
+   color:#c1c4c6;
+}
+ button{
+    margin:20px;
+    padding:10px 14px;
+     width: 100px;
+     border-radius: 24px;
+     border:1px solid #d2dae2;
+     background-color: #ffffff;
+     cursor: pointer;
+     transition: 0.7s;
+     color:#7f8c8d ;
+     font-size:20px ;
+     color: #34495e;
+}
+ button:hover{
+background-color: #34495e;
+color:#ffffff;
+
+}
+ span{
+    color: #ffffff;
+   
  }
