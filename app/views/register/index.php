@@ -20,45 +20,68 @@
         <span>
             <input type="checkbox"> من را به خاطر بسپار
         </span>
-        <span id="showerror"  ></span>
+        <span id="showerror" style="display: none;">پسورد باید حداقل 8 کاراکتر شامل حروف کوچک و بزرگ داشته باشد</span>
         <button type="submit" id="btn">ثبت نام</button>
 
     </form>
 
     <script src="public/js/jquery-3.4.1.min.js"></script>
     <script>
-        function CheckPassword(inputtxt)
-    {
-        var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-        if(inputtxt.match(passw))
-        {
-            return true;
+        function CheckPassword(inputtxt) {
+            var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+            
+            if (inputtxt.value.match(passw)) {
+                return true;
+            } else {
+                return false;
+            }
         }
-        else
-        {
-            return false;
-        }
-    }
         $("#btn").on('click', function() {
             var username = document.getElementById("username").value;
 
             var password = document.getElementById("password").value;
+
             var rpassword = document.getElementById("rpassword").value;
 
             if (username == "" || password == "" || rpassword == "") {
-                
 
+                document.getElementById("showerror").style.display="block";
                 $("#showerror").text("پر کردن تمام فیلدها الزامی است");
-            }else if( password !== rpassword ){ 
-             
-                $("#showerror").text("فیلد پسورد اشتباه پر شده است");
-               
-            
-            }else if((password.length)<8 ){
+            } else if (password !== rpassword) {
+                document.getElementById("showerror").style.display="block";
+                $("#showerror").text("تکرار پسورد اشتباه است");
+                document.getElementById("rpassword").value = "";
+            } else if ((password.length) < 2) {
+                document.getElementById("showerror").style.display="block";
                 $("#showerror").text("پسورد باید حداقل 8 کاراکتر داشته باشد");
-            }else if(CheckPassword(password)==false ){
-                $("#showerror").text("پسورد باید شامل حروف و اعداد و * باشد");
-            }else alert("شروع ajax ");
+                document.getElementById("password").value = "";
+                document.getElementById("rpassword").value = "";
+            } else 
+
+            // if (CheckPassword(document.getElementById("password")) == false) {
+            //     $("#showerror").text("پسورد باید شامل حروف و اعداد و * باشد");
+            //     document.getElementById("password").value = "";
+            //     document.getElementById("rpassword").value = "";
+            // } else 
+            {
+                document.getElementById("showerror").style.display="none";
+                
+               $.ajax({
+                url:"<?=URL;?>register/insert_data",
+                type:"POST",
+                data:{
+                    "username":username,
+                    "password":password,
+                    "rpassword":rpassword
+                },
+                success:function(responce){
+
+                },
+                error:function(responce){
+
+                }
+               });
+            }
         });
     </script>
 </body>
