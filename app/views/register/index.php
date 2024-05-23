@@ -77,10 +77,10 @@
                     success: function (response){
                       response = JSON.parse(response);
                       if(response.status_code == "404"){
-                          $("#showerror").text("again");
+                          $("#showerror").text("again");window.location="<?=URL?>login";
                       } else {
                         $("#showerror").text("okkk");
-                     
+                        window.location="<?=URL?>login";
                       }
                   },
                     error: function(response) {
