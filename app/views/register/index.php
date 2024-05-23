@@ -20,7 +20,7 @@
         <span>
             <input type="checkbox"> من را به خاطر بسپار
         </span>
-        <span id="showerror" style="display: none;">پسورد باید حداقل 8 کاراکتر شامل حروف کوچک و بزرگ داشته باشد</span>
+        <span id="showerror">پسورد باید حداقل 8 کاراکتر شامل حروف کوچک و بزرگ داشته باشد</span>
         <button type="submit" id="btn">ثبت نام</button>
 
     </form>
@@ -29,7 +29,7 @@
     <script>
         function CheckPassword(inputtxt) {
             var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-            
+
             if (inputtxt.value.match(passw)) {
                 return true;
             } else {
@@ -45,18 +45,18 @@
 
             if (username == "" || password == "" || rpassword == "") {
 
-                document.getElementById("showerror").style.display="block";
+                document.getElementById("showerror").style.display = "block";
                 $("#showerror").text("پر کردن تمام فیلدها الزامی است");
             } else if (password !== rpassword) {
-                document.getElementById("showerror").style.display="block";
+                document.getElementById("showerror").style.display = "block";
                 $("#showerror").text("تکرار پسورد اشتباه است");
                 document.getElementById("rpassword").value = "";
             } else if ((password.length) < 2) {
-                document.getElementById("showerror").style.display="block";
+                document.getElementById("showerror").style.display = "block";
                 $("#showerror").text("پسورد باید حداقل 8 کاراکتر داشته باشد");
                 document.getElementById("password").value = "";
                 document.getElementById("rpassword").value = "";
-            } else 
+            } else
 
             // if (CheckPassword(document.getElementById("password")) == false) {
             //     $("#showerror").text("پسورد باید شامل حروف و اعداد و * باشد");
@@ -64,23 +64,29 @@
             //     document.getElementById("rpassword").value = "";
             // } else 
             {
-                document.getElementById("showerror").style.display="none";
-                
-               $.ajax({
-                url:"<?=URL;?>register/insert_data",
-                type:"POST",
-                data:{
-                    "username":username,
-                    "password":password,
-                    "rpassword":rpassword
-                },
-                success:function(responce){
 
-                },
-                error:function(responce){
 
-                }
-               });
+                $.ajax({
+                    url: "<?= URL; ?>register/insert_data",
+                    type: "POST",
+                    data: {
+                        "username": username,
+                        "password": password,
+                        "rpassword": rpassword
+                    },
+                    success: function (response){
+                      response = JSON.parse(response);
+                      if(response.status_code == "404"){
+                          $("#showerror").text("again");
+                      } else {
+                        $("#showerror").text("okkk");
+                     
+                      }
+                  },
+                    error: function(response) {
+                        alert("خطای 500");
+                    }
+                });
             }
         });
     </script>

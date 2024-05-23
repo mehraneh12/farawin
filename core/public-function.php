@@ -182,10 +182,10 @@ trait publicTrait
         }
         $stmt->execute();
         if ($fetch == '') {
-            $result = $stmt->fetchAll($fetchStyle);
+            $result = $stmt->fetchAll($fetchStyle); 
         } else {
             $result = $stmt->fetch($fetchStyle);
-            var_dump($result);exit;
+         
         }
 
         return $result;
