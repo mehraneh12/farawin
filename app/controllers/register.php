@@ -1,14 +1,14 @@
 <?php
 class register extends controller
 { 
-    public $checkregister ='';
+    public $checkLogin ='';
 
     function __construct()
     {
         parent::__construct();
-        // $this->checkregister  = model::session_get("username");
-        if ($this->checkregister  != '') {
-            header("Location:/farawin/login");
+         $this->checkLogin= model::session_get("username");
+        if ($this->checkLogin != FALSE) {
+            header("Location:".URL);
         }
     }
     function index()

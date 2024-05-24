@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>register</title>
-    <base href="<?= URL; ?>">
+    <base href="<?= URL;?>">
 
     <link rel="stylesheet" href="public/css/style.css">
 
@@ -71,11 +71,11 @@
                             // document.getElementById("showerror").value="شما قبلا ثبت نام کرده اید";
                             // $("#showerror").text("شما قبلا ثبت نام کرده اید");
                              alert("شما قبلا ثبت نام کرده اید");
-                            window.location = "<?= URL?>app/views/login/index.php";
+                            window.location = "<?= URL?>URL";
                         } else {
                             // $("#showerror").text="ثبت نام با موفقیت انجام شد";
                             alert("ثبت نام با موفقیت انجام شد");
-                            window.location ="<?=URL?>app/views/login/index.php";
+                            window.location ="<?=URL?>URL";
                         }
                     },
                     error: function(response) {

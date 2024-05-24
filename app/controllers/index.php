@@ -3,7 +3,7 @@
 class Index extends Controller
 {
     public $checkLogin = '';
-    // public $checkregister ='';
+    
 
     function __construct()
     {
@@ -12,8 +12,8 @@ class Index extends Controller
        
             $this->checkLogin = Model::session_get("username");
             if ($this->checkLogin == FALSE) {
-                header("Location: /farawin/login");
-            }else{header("Location: ". URL);}
+                header("Location:".URL."login");
+            }
         }
     
 
