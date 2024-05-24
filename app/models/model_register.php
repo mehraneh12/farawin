@@ -6,8 +6,8 @@ class model_register extends model
       parent::__construct();
    }
    function insert_data($post)
-   {
-      // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+   { 
+       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
       $sql = "SELECT * FROM farawin WHERE username=? ";
       $values = array($post['username']);
@@ -31,6 +31,6 @@ class model_register extends model
          );
       }
 
-      // } else echo "error";
+       } else echo "error";
    }
 }

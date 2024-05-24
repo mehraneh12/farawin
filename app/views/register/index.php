@@ -56,16 +56,7 @@
                 $("#showerror").text("پسورد باید حداقل 8 کاراکتر داشته باشد");
                 document.getElementById("password").value = "";
                 document.getElementById("rpassword").value = "";
-            } else
-
-            // if (CheckPassword(document.getElementById("password")) == false) {
-            //     $("#showerror").text("پسورد باید شامل حروف و اعداد و * باشد");
-            //     document.getElementById("password").value = "";
-            //     document.getElementById("rpassword").value = "";
-            // } else 
-            {
-
-
+            } else {
                 $.ajax({
                     url: "<?= URL; ?>register/insert_data",
                     type: "POST",
@@ -74,15 +65,16 @@
                         "password": password,
                         "rpassword": rpassword
                     },
-                    success: function (response){
-                      response = JSON.parse(response);
-                      if(response.status_code == "404"){
-                          $("#showerror").text("again");window.location="<?=URL?>login";
-                      } else {
-                        $("#showerror").text("okkk");
-                        window.location="<?=URL?>login";
-                      }
-                  },
+                    success: function(response) {
+                        response = JSON.parse(response);
+                        if (response.status_code == "404") {
+                            $("#showerror").text("شما قبلا ثبت نام کرده اید");
+                            window.location = "<?= URL ?>/login";
+                        } else {
+                            $("#showerror").text("ثبت نام با موفقیت انجام شد");
+                            window.location = "<?= URL ?>/login";
+                        }
+                    },
                     error: function(response) {
                         alert("خطای 500");
                     }
