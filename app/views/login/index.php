@@ -1,19 +1,33 @@
-<html>
-<head>
-    <base href="<?= URL ?>">
-</head>
-<body>
-<form onsubmit="return false;">
-    <label>Username:</label>
-    <input id="username" class="select" name="username" placeholder="Enter username" />
-    <label>Password:</label>
-    <input id="password" class="select" name="password" type="password" placeholder="Enter password" />
-    <input id="btn" type="submit" value="send data"/>
-    <br/>
-    <span id="showError"></span>
-</form>
+hi login page
+<!DOCTYPE html>
+<html lang="en">
 
-<script src="public/js/jquery-3.4.1.min.js"/></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+    <base href="<?= URL; ?>">
+
+    <link rel="stylesheet" href="public/css/style.css">
+
+</head>
+
+<body>
+    <form class="login" onsubmit="return false;">
+        <h1>ورود</h1>
+        <input type="text" id="username" name="username" placeholder="نام کاربری">
+        <input type="password" id="password" name="password"  placeholder="رمز ورود">
+        
+        <span>
+            <input type="checkbox"> من را به خاطر بسپار
+        </span>
+        <span id="showerror"></span>
+        <button type="submit" id="btn">ورود</button>
+
+    </form>
+
+
+<script src="public/js/jquery-3.4.1.min.js"></script>
 
 <script>
     function CheckPassword(inputtxt)

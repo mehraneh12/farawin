@@ -13,7 +13,7 @@
 
 <body>
     <form class="login" onsubmit="return false;">
-        <h1>فرم ثبت نام</h1>
+        <h1>ثبت نام</h1>
         <input type="text" id="username" placeholder="نام کاربری">
         <input type="password" id="password" placeholder="رمز ورود">
         <input type="password" id="rpassword" placeholder="تکرار رمز عبور">
@@ -68,11 +68,14 @@
                     success: function(response) {
                         response = JSON.parse(response);
                         if (response.status_code == "404") {
-                            $("#showerror").text("شما قبلا ثبت نام کرده اید");
-                            window.location = "<?= URL ?>/login";
+                            // document.getElementById("showerror").value="شما قبلا ثبت نام کرده اید";
+                            // $("#showerror").text("شما قبلا ثبت نام کرده اید");
+                             alert("شما قبلا ثبت نام کرده اید");
+                            window.location = "<?= URL?>app/views/login/index.php";
                         } else {
-                            $("#showerror").text("ثبت نام با موفقیت انجام شد");
-                            window.location = "<?= URL ?>/login";
+                            // $("#showerror").text="ثبت نام با موفقیت انجام شد";
+                            alert("ثبت نام با موفقیت انجام شد");
+                            window.location ="<?=URL?>app/views/login/index.php";
                         }
                     },
                     error: function(response) {
