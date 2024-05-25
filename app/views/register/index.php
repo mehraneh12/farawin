@@ -16,7 +16,7 @@ hello register
     <form class="login" onsubmit="return false;">
         <h1>register</h1>
         <div id="div"> <label for="username" id="lable" >+98</label>
-        <input type="text" id="username" placeholder="091533....." maxlength="13"   required></div>
+        <input type="text" id="username" placeholder="91533....." maxlength="10"   required></div>
         <input type="password" id="password" placeholder="   password"  required>
         <input type="password" id="rpassword" placeholder="config-password"  required>
         <div>
@@ -28,7 +28,7 @@ hello register
         <!-- <span>
             <input type="checkbox"> من را به خاطر بسپار
         </span> -->
-        <span id="showerror" style="display: none;">پسورد باید حداقل 8 کاراکتر شامل حروف کوچک و بزرگ داشته باشد</span>
+        <span id="showerror" style="visibility: hidden;">پسورد باید حداقل 8 کاراکتر شامل حروف کوچک و بزرگ داشته باشد</span>
 
 
     </form>
@@ -45,7 +45,7 @@ hello register
             }
         }
      function Checkphone(number){
-            var regex =new RegExp("^(\\+98|0)?9\\d{9}$");
+            var regex =new RegExp("^(\\0)?9\\d{9}$");
             var result=regex.test(number);
              return result;
             }
@@ -63,21 +63,20 @@ hello register
             var password = document.getElementById("password").value;
 
             var rpassword = document.getElementById("rpassword").value;
-var x=Checkphone(username);
-alert(x);
-           if(x==false){
-            document.getElementById("showerror").style.display = "block";
+
+           if(Checkphone(username)==false){
+            document.getElementById("showerror").style.visibility = "visible";
                 $("#showerror").text(" فرمت موبایل رعایت نشده است" )
            }else if (username == "" || password == "" || rpassword == "") {
 
-                document.getElementById("showerror").style.display = "block";
+            document.getElementById("showerror").style.visibility = "visible";
                 $("#showerror").text("پر کردن تمام فیلدها الزامی است");
             } else if (password !== rpassword) {
-                document.getElementById("showerror").style.display = "block";
+                document.getElementById("showerror").style.visibility = "visible";
                 $("#showerror").text("تکرار پسورد اشتباه است");
                 document.getElementById("rpassword").value = "";
             } else if (CheckPassword(password)==false){
-                document.getElementById("showerror").style.display = "block";
+                document.getElementById("showerror").style.visibility = "visible";
                 $("#showerror").text(" پسورد باید بین 6 تا 20 کاراکتر و شامل حروف کوچک و بزرگ انگلیسی , اعداد باشد");
                 document.getElementById("password").value = "";
                 document.getElementById("rpassword").value = "";
