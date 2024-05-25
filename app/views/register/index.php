@@ -15,9 +15,9 @@ hello register
 <body>
     <form class="login" onsubmit="return false;">
         <h1>register</h1>
-        <label for="username">phone</label>
-        <input type="text" id="username" placeholder="+98..........." maxlength="13"   required>
-        <input type="password" id="password" placeholder="password"  required>
+        <div id="div"> <label for="username" id="lable" >+98</label>
+        <input type="text" id="username" placeholder="091533....." maxlength="13"   required></div>
+        <input type="password" id="password" placeholder="   password"  required>
         <input type="password" id="rpassword" placeholder="config-password"  required>
         <div>
             <a href="login">login</a>
