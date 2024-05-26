@@ -15,41 +15,60 @@ hello register
 <body>
     <form class="login" onsubmit="return false;">
         <h1>register</h1>
-        <div id="div"> <label for="username" id="lable" >+98</label>
-        <input type="text" id="username" placeholder="91533....." maxlength="10"   required></div>
-        <input type="password" id="password" placeholder="   password"  required>
-        <input type="password" id="rpassword" placeholder="config-password"  required>
+        <div id="div"> <label for="username" id="lable">+98</label>
+            <input type="text" id="username" placeholder="91533....." maxlength="10" required>
+        </div>
+        <input type="password" id="password" placeholder="   password" required>
+        <input type="password" id="rpassword" placeholder="config-password" required>
         <div>
             <a href="login">login</a>
             <button type="submit" id="btn">register</button>
-            
+
         </div>
 
         <!-- <span>
             <input type="checkbox"> من را به خاطر بسپار
         </span> -->
-        <span id="showerror" style="visibility: hidden;">پسورد باید حداقل 8 کاراکتر شامل حروف کوچک و بزرگ داشته باشد</span>
+        <span id="showerror" style="visibility: hidden;"></span>
 
 
     </form>
 
     <script src="public/js/jquery-3.4.1.min.js"></script>
     <script>
+        var checkregister;
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var elements = document.getElementsByTagName("input");
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].oninvalid = function(e) {
+                    e.target.setCustomValidity("");
+                    if (!e.target.validity.valid) {
+                        e.target.setCustomValidity("پر کردن این فیلد الزامیست");
+                    }
+                };
+                elements[i].oninput = function(e) {
+                    e.target.setCustomValidity("");
+                };
+            }
+        })
+
         function CheckPassword(inputtxt) {
             var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-             alert(inputtxt.match(passw));
+            alert(inputtxt.match(passw));
             if (inputtxt.match(passw)) {
                 return true;
             } else {
                 return false;
             }
         }
-     function Checkphone(number){
-            var regex =new RegExp("^(\\0)?9\\d{9}$");
-            var result=regex.test(number);
-             return result;
-            }
-        
+
+        function Checkphone(number) {
+            var regex = new RegExp("^(\\0)?9\\d{9}$");
+            var result = regex.test(number);
+            return result;
+        }
+
 
         $("#btn").on('keypress', function(e) {
             if (e.which == 13) {
@@ -64,18 +83,18 @@ hello register
 
             var rpassword = document.getElementById("rpassword").value;
 
-           if(Checkphone(username)==false){
-            document.getElementById("showerror").style.visibility = "visible";
-                $("#showerror").text(" فرمت موبایل رعایت نشده است" )
-           }else if (username == "" || password == "" || rpassword == "") {
+            if (Checkphone(username) == false) {
+                document.getElementById("showerror").style.visibility = "visible";
+                $("#showerror").text(" فرمت موبایل رعایت نشده است")
+            // } else if (username == "" || password == "" || rpassword == "") {
 
-            document.getElementById("showerror").style.visibility = "visible";
-                $("#showerror").text("پر کردن تمام فیلدها الزامی است");
+            //     document.getElementById("showerror").style.visibility = "visible";
+            //     $("#showerror").text("پر کردن تمام فیلدها الزامی است");
             } else if (password !== rpassword) {
                 document.getElementById("showerror").style.visibility = "visible";
                 $("#showerror").text("تکرار پسورد اشتباه است");
                 document.getElementById("rpassword").value = "";
-            } else if (CheckPassword(password)==false){
+            } else if (CheckPassword(password) == false) {
                 document.getElementById("showerror").style.visibility = "visible";
                 $("#showerror").text(" پسورد باید بین 6 تا 20 کاراکتر و شامل حروف کوچک و بزرگ انگلیسی , اعداد باشد");
                 document.getElementById("password").value = "";
@@ -96,7 +115,7 @@ hello register
                             // alert("شما قبلا ثبت نام کرده اید");
                             window.location = "<?= URL; ?>login";
                         } else {
-
+                            checkregister = "ok";
                             // alert("ثبت نام با موفقیت انجام شد");
                             window.location = "<?= URL; ?>login";
                         }

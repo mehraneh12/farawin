@@ -1,6 +1,6 @@
 hello login
 
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html lang="en">
 
 <head>
@@ -12,18 +12,94 @@ hello login
     <link rel="stylesheet" href="public/css/style.css">
 </head>
 
-<body>
+<body >
     <form class="login" onsubmit="return false;">
         <h1>login</h1>
-        <input type="text" id="username" placeholder="phone" pattern="09(0[1-2]|1[0-9]|3[0-9]|2[0-1])-?[0-9]{3}-?[0-9]{4}">
-        <input type="password" id="password" placeholder="password">
+        <input type="text" id="username" placeholder="915......." maxlength="10" required >
+        <input type="password" id="password" placeholder="password" required >
         <div>
             <button type="submit" id="btn" class="btn">login</button>
             <a href="register" class="btn">register</a>
         </div>
-        <span id="showerror" style="display: none;">پسورد باید حداقل 8 کاراکتر شامل حروف کوچک و بزرگ داشته باشد</span>
+        <span id="showerror" style="visibility: hidden;"></span>
 
     </form>
+
+
+
+    <script src="public/js/jquery-3.4.1.min.js"></script>
+
+<script>
+    function CheckPassword(inputtxt)
+    {
+        var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+        if(inputtxt.match(passw))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+    var elements = document.getElementsByTagName("input");
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].oninvalid = function(e) {
+            e.target.setCustomValidity("");
+            if (!e.target.validity.valid) {
+                e.target.setCustomValidity("پر کردن این فیلد الزامیست");
+            }
+        };
+        elements[i].oninput = function(e) {
+            e.target.setCustomValidity("");
+        };
+    }
+})  
+
+    $("#btn").on('click',function (){
+          var username = document.getElementById("username").value;
+          var password = document.getElementById("password").value;
+
+        //   if(username==""){
+          
+        //     document.getElementById("showerror").style.visibility = "visible";
+        //         $("#showerror").text("");
+        //   } else if (password==""){
+        //     // document.getElementById("showerror").style.visibility = "visible";
+        //     //     $("#showerror").text("پر کردن تمام فیلدها الزامیست");
+        //     //   $("#showError").text("Password is not secure");
+        //   } else {
+              $.ajax({
+                  url: "<?= URL; ?>login/check_data",
+                  type: "POST",
+                  data: {
+                      "username": username,
+                      "password": password
+                  },
+                  success: function (response){
+                      response = JSON.parse(response);
+                    //   if(response.status_code == "404"){
+                    //     document.getElementById("showerror").style.visibility = "visible";
+                    //       $("#showerror").text("Username or Password is wrong");
+                    //   } else 
+                       if(response.status_code == "505"){
+                        document.getElementById("showerror").style.visibility = "visible";
+                          $("#showerror").text("کاربری با این مشخصات ثبت نام نشده است");
+                         
+                      }else{
+                          window.location = "<?=URL;?>index";
+                      }
+                  },
+                  error: function (response) {
+                      alert("dsgdgfdgdfgd");
+                  }
+              });
+          }
+        
+    );
+</script>
 
 </body>
 
