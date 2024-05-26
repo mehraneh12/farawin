@@ -1,4 +1,4 @@
-hello register
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,10 +15,13 @@ hello register
 <body>
     <form class="login" onsubmit="return false;">
         <h1>register</h1>
-        <div id="div"> <label for="username" id="lable">+98</label>
+        <div id="div"> 
+            <label for="username" id="lable">+98</label>
             <input type="text" id="username" placeholder="91533....." maxlength="10" required>
         </div>
-        <input type="password" id="password" placeholder="   password" required>
+       
+            <input type="password" id="password" placeholder="   password" required>
+        
         <input type="password" id="rpassword" placeholder="config-password" required>
         <div>
             <a href="login">login</a>
@@ -36,8 +39,6 @@ hello register
 
     <script src="public/js/jquery-3.4.1.min.js"></script>
     <script>
-        var checkregister;
-
         document.addEventListener("DOMContentLoaded", function() {
             var elements = document.getElementsByTagName("input");
             for (var i = 0; i < elements.length; i++) {
@@ -83,13 +84,13 @@ hello register
 
             var rpassword = document.getElementById("rpassword").value;
 
-            if (Checkphone(username) == false) {
+            if (Checkphone(username) ==false) {
                 document.getElementById("showerror").style.visibility = "visible";
                 $("#showerror").text(" فرمت موبایل رعایت نشده است")
-            // } else if (username == "" || password == "" || rpassword == "") {
+                // } else if (username == "" || password == "" || rpassword == "") {
 
-            //     document.getElementById("showerror").style.visibility = "visible";
-            //     $("#showerror").text("پر کردن تمام فیلدها الزامی است");
+                //     document.getElementById("showerror").style.visibility = "visible";
+                //     $("#showerror").text("پر کردن تمام فیلدها الزامی است");
             } else if (password !== rpassword) {
                 document.getElementById("showerror").style.visibility = "visible";
                 $("#showerror").text("تکرار پسورد اشتباه است");
@@ -111,12 +112,9 @@ hello register
                     success: function(response) {
                         response = JSON.parse(response);
                         if (response.status_code == "404") {
-
-                            // alert("شما قبلا ثبت نام کرده اید");
                             window.location = "<?= URL; ?>login";
                         } else {
                             checkregister = "ok";
-                            // alert("ثبت نام با موفقیت انجام شد");
                             window.location = "<?= URL; ?>login";
                         }
                     },

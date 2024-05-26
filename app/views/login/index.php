@@ -1,4 +1,4 @@
-hello login
+
 
 <!DOCTYPE html >
 <html lang="en">
@@ -30,6 +30,19 @@ hello login
     <script src="public/js/jquery-3.4.1.min.js"></script>
 
 <script>
+     function Checkphone(number) {
+            var regex = new RegExp("^(\\98|0)?9\\d{9}$");
+            var result = regex.test(number);
+            return result;
+        }
+
+
+        $("#btn").on('keypress', function(e) {
+            if (e.which == 13) {
+                $('form#btn').submit();
+                return false;
+            }
+        });
     function CheckPassword(inputtxt)
     {
         var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
@@ -84,16 +97,16 @@ hello login
                     //     document.getElementById("showerror").style.visibility = "visible";
                     //       $("#showerror").text("Username or Password is wrong");
                     //   } else 
-                       if(response.status_code == "505"){
+                       if(response.status_code == "404"){
                         document.getElementById("showerror").style.visibility = "visible";
-                          $("#showerror").text("کاربری با این مشخصات ثبت نام نشده است");
+                          $("#showerror").text(".کاربری با این مشخصات ثبت نام نشده است");
                          
                       }else{
                           window.location = "<?=URL;?>index";
                       }
                   },
                   error: function (response) {
-                      alert("dsgdgfdgdfgd");
+                      alert("خطای ajax");
                   }
               });
           }
