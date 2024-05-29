@@ -11,6 +11,7 @@ class Index extends Controller
         
        
             $this->checkLogin = Model::session_get("username");
+            // var_dump($this->checkLogin);
             if ($this->checkLogin == FALSE) {
                 header("Location:".URL."login");
             }

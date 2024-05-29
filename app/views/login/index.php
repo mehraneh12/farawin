@@ -15,7 +15,7 @@
 <body >
     <form class="login" onsubmit="return false;">
         <h1>login</h1>
-        <input type="text" id="username" placeholder="915......." maxlength="10" required >
+        <input type="text" id="username" placeholder="+98915......." maxlength="13" required >
         <input type="password" id="password" placeholder="password" required >
         <div>
             <button type="submit" id="btn" class="btn">login</button>
@@ -31,7 +31,7 @@
 
 <script>
      function Checkphone(number) {
-            var regex = new RegExp("^(\\98|0)?9\\d{9}$");
+        var regex = new RegExp("^(\\+98|0)?9\\d{9}$");
             var result = regex.test(number);
             return result;
         }
@@ -75,15 +75,7 @@
           var username = document.getElementById("username").value;
           var password = document.getElementById("password").value;
 
-        //   if(username==""){
-          
-        //     document.getElementById("showerror").style.visibility = "visible";
-        //         $("#showerror").text("");
-        //   } else if (password==""){
-        //     // document.getElementById("showerror").style.visibility = "visible";
-        //     //     $("#showerror").text("پر کردن تمام فیلدها الزامیست");
-        //     //   $("#showError").text("Password is not secure");
-        //   } else {
+        
               $.ajax({
                   url: "<?= URL; ?>login/check_data",
                   type: "POST",
@@ -93,16 +85,13 @@
                   },
                   success: function (response){
                       response = JSON.parse(response);
-                    //   if(response.status_code == "404"){
-                    //     document.getElementById("showerror").style.visibility = "visible";
-                    //       $("#showerror").text("Username or Password is wrong");
-                    //   } else 
+                    
                        if(response.status_code == "404"){
                         document.getElementById("showerror").style.visibility = "visible";
-                          $("#showerror").text(".کاربری با این مشخصات ثبت نام نشده است");
+                          $("#showerror").text(".شما هنوز ثبت نام نکرده اید");
                          
                       }else{
-                          window.location = "<?=URL;?>index";
+                          window.location = "<?=URL;?>";
                       }
                   },
                   error: function (response) {
