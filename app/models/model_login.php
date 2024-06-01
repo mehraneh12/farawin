@@ -3,6 +3,7 @@
 class model_login extends Model
 {
     public $checkLogin = '';
+    public $checkid='';
 
     function __construct()
     {
@@ -27,7 +28,9 @@ class model_login extends Model
            
         } else {
             $this->session_set("username", $result[0]['username']);
+            $this->session_set("id", $result[0]['id']);
             $this->checkLogin = $result[0]['username'];
+            $this->checkid=$result[0]['id'];
             echo json_encode(array(
                     "msg" => "ok",
                     "status_code"=>  "200"

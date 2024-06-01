@@ -15,7 +15,7 @@
 <body >
     <form class="login" onsubmit="return false;">
         <h1>login</h1>
-        <input type="text" id="username" placeholder="+98915......." maxlength="13" required >
+        <input type="text" id="username" placeholder="0915......." maxlength="11" required >
         <input type="password" id="password" placeholder="password" required >
         <div>
             <button type="submit" id="btn" class="btn">login</button>

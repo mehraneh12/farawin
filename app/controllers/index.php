@@ -3,13 +3,13 @@
 class Index extends Controller
 {
     public $checkLogin = '';
-  
+    public $checkid='';
 
     function __construct()
     {
         parent::__construct();
         
-       
+    //   unset( $_SESSION['username']);
             $this->checkLogin = Model::session_get("username");
             // var_dump($this->checkLogin);
             if ($this->checkLogin == FALSE) {
@@ -25,5 +25,9 @@ class Index extends Controller
 
         //        $this->view('index/index', $data);
         $this->view('index/index');
+    }
+    function contact_data(){
+    
+        $this->model->contact_data($_POST);
     }
 }

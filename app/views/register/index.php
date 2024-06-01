@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,13 +14,13 @@
 <body>
     <form class="login" onsubmit="return false;">
         <h1>register</h1>
-        <div id="div"> 
+        <div id="div">
             <!-- <label for="username" id="lable">+98</label> -->
-            <input type="text" id="username" placeholder="+9891533....." maxlength="13" required>
+            <input type="text" id="username" placeholder="091533....." maxlength="11" required>
         </div>
-        <!-- <input type="text" id="username" placeholder="91533....." maxlength="10" required> -->
-            <input type="password" id="password" placeholder="   password" required>
-        
+        <!-- <input type="text" id="username" placeholder="091533....." maxlength="10" required> -->
+        <input type="password" id="password" placeholder="   password" required>
+
         <input type="password" id="rpassword" placeholder="config-password" required>
         <div>
             <a href="login">login</a>
@@ -39,7 +38,6 @@
 
     <script src="public/js/jquery-3.4.1.min.js"></script>
     <script>
-
         //اگر فیلدهای ضروری پر نشوند در زیر انها پیامی ظاهر خواهد شد
         document.addEventListener("DOMContentLoaded", function() {
             var elements = document.getElementsByTagName("input");
@@ -55,17 +53,16 @@
                 };
             }
         })
-        
+
 
         // اعتبار سنجی پسور وارد شده
         function CheckPassword(inputtxt) {
             var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-            alert(inputtxt.match(passw));
             if (inputtxt.match(passw)) {
-              
+
                 return true;
             } else {
-                
+
                 return false;
             }
         }
@@ -94,7 +91,7 @@
 
             var rpassword = document.getElementById("rpassword").value;
 
-            if (Checkphone(username) ==false) {
+            if (Checkphone(username) == false) {
                 document.getElementById("showerror").style.visibility = "visible";
                 $("#showerror").text(" فرمت موبایل رعایت نشده است")
                 // } else if (username == "" || password == "" || rpassword == "") {
