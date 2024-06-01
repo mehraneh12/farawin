@@ -215,6 +215,8 @@
     <div id="modal">
         <div class="content">
             <form onsubmit="return false">
+            <!-- <i class="fas fa-plus close" id="close"> -->
+           <button type="button" id="close"class="close fas fa-times " style="color:white;outline:none;" ></button><br>
                 <input type="text" placeholder="name" id="name2" class="contact"><br>
                 <input type="text" placeholder=".......0915" id="phone2" class="contact" maxlength="11"><br>
                 <button type="submit" id="add" class="contact">add contact</button><br>
@@ -241,7 +243,9 @@
         plus.onclick = function() {
             modal.style.display = 'block';
         };
-
+        document.getElementById('close').onclick = function() {
+            modal.style.display = 'none';
+        };
         // خواندن اطلاعات مودال
         add.onclick = function() {
             var contactName = document.getElementById("name2").value;
