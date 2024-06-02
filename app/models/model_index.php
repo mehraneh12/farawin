@@ -9,42 +9,43 @@ class model_index extends Model
    }
    function contact_data($post)
    {
-
-  
-
       $sql = "SELECT * FROM users WHERE username=?";
       $values = array($post['contactPhone']);
       $result = $this->doSelect($sql, $values);
-if (sizeof($result) != 0) {
-      $contact = $result[0]['id'];
-
-      $stmt = "SELECT * FROM contact WHERE contactid=?";
-      $params = array($contact);
-      $res = $this->doSelect($stmt, $params);
-
-
-
-
-      
-
-         if (sizeof($res) == 0) {
-            $sql = "INSERT INTO contact(userid,contactid,name) VALUES(?,?,?) ";
-            $values = array($_SESSION['id'], $result[0]['id'], $post['contactName']);
-            $this->doQuery($sql, $values);
-
+      if (sizeof($result) != 0) {
+         if ($_SESSION['id'] == $result[0]['id']) {
             echo json_encode(
                array(
-                  "msg" => "ok",
-                  "status_code" =>  "200"
+                  "msg" => "اطلاعات خودتان نمیتواند به جدول مخاطبان اضافه شود",
+                  "status_code" =>  "101"
                )
             );
          } else {
-            echo json_encode(
-               array(
-                  "msg" => "not found",
-                  "status_code" =>  "303"
-               )
-            );
+            $contact = $result[0]['id'];
+
+            $stmt = "SELECT * FROM contact WHERE contactid=?";
+            $params = array($contact);
+            $res = $this->doSelect($stmt, $params);
+
+            if (sizeof($res) == 0) {
+               $sql = "INSERT INTO contact(userid,contactid,name) VALUES(?,?,?) ";
+               $values = array($_SESSION['id'], $result[0]['id'], $post['contactName']);
+               $this->doQuery($sql, $values);
+
+               echo json_encode(
+                  array(
+                     "msg" => "ok",
+                     "status_code" =>  "200"
+                  )
+               );
+            } else {
+               echo json_encode(
+                  array(
+                     "msg" => "not found",
+                     "status_code" =>  "303"
+                  )
+               );
+            }
          }
       } else {
 

@@ -286,9 +286,11 @@
                     },
                     success:function(response) {
                         response = JSON.parse(response);
-                        if (response.status_code == "404") {
-
-                           
+                        if(response.status_code == "101"){ 
+                            warning1.style.display = "block";
+                            $("#warning1").text("اطلاعات خودتان نمیتواند به جدول مخاطبان اضافه شود");
+                        }else if (response.status_code == "404") {
+                                                
                             warning1.style.display = "block";
                             $("#warning1").text("مخاطب را به فراوین دعوت کنید");
                             
