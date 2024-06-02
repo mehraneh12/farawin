@@ -239,18 +239,34 @@
         // اشکار کردن وپنهان کردن مودال در صفحه
         var modal = document.getElementById('modal');
         var plus = document.getElementById('plus');
-        var add = document.getElementById('add');
-        plus.onclick = function() {
+        var add = document.getElementById('add'); 
+        var close= document.getElementById('close');
+        
+        plus.onclick = function() { 
+            document.getElementById("name2").value="";
+            document.getElementById("phone2").value="";
+            document.getElementById("warning1").style.display="none";
             modal.style.display = 'block';
         };
-        document.getElementById('close').onclick = function() {
+        close.onclick = function() {
+           
             modal.style.display = 'none';
         };
+       
+       document.getElementById("name2").onfocus=function() {
+            document.getElementById("name2").value="";
+            $("#warning1").text("");
+       }; 
+       document.getElementById("phone2").onfocus=function() {
+            document.getElementById("phone2").value="";
+            $("#warning1").text("");
+       };
         // خواندن اطلاعات مودال
         add.onclick = function() {
             var contactName = document.getElementById("name2").value;
             var contactPhone = document.getElementById("phone2").value;
             var warning1 = document.getElementById("warning1");
+           
             if (contactName == "" || contactPhone == "") {
                 warning1.style.display = "block";
                 $("#warning1").text("پر کردن تمامی فیلدها الزامیست");
@@ -280,6 +296,7 @@
 
                             warning1.style.display = "block";
                             $("#warning1").text("این مخاطب قبلا در جدول مخاطبین اضافه شده");
+                            
                         }else 
                         {
                            

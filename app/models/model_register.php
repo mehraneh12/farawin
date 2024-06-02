@@ -14,12 +14,12 @@ class model_register extends model
             if (!empty($post['username']) and !empty($post['password']) and !empty($post['rpassword'])) {
                if ($post['password'] == $post['rpassword']) {
                   if (strlen($post['password']) >= 6 && strlen($post['password']) <20) {
-                     $sql = "SELECT * FROM farawin WHERE username=? ";
+                     $sql = "SELECT * FROM users WHERE username=? ";
                      $values = array($post['username']);
                      $result = $this->doSelect($sql, $values);
 
                      if (sizeof($result) == 0) {
-                        $sql = "INSERT INTO farawin (username,password,rpassword) VALUES(?,?,?) ";
+                        $sql = "INSERT INTO users (username,password,rpassword) VALUES(?,?,?) ";
                         $values = array($post['username'], md5($post['password']), md5($post['rpassword']));
                         $this->doQuery($sql, $values);
                        

@@ -13,7 +13,7 @@ class model_login extends Model
 
     function check_data($post)
     {
-        $sql = "SELECT * FROM farawin WHERE username=? and password=?";
+        $sql = "SELECT * FROM users WHERE username=? and password=?";
         $params = array($post['username'], md5($post['password']));
         $result = $this->doSelect($sql, $params);
 
