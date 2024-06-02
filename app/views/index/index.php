@@ -272,16 +272,19 @@
                         response = JSON.parse(response);
                         if (response.status_code == "404") {
 
-                            // modal.style.display = "none";
-                            //   alert("مخاطب در فراوین حساب کاربری ندارد");
-                            document.getElementById("warning1").style.display = "block";
+                           
+                            warning1.style.display = "block";
                             $("#warning1").text("مخاطب را به فراوین دعوت کنید");
                             
-                        } else {
-                            // modal.style.display = "none";
-                            //    alert("مخاطب اضافه شد");
-                            document.getElementById("warning1").style.display = "block";
-                            $("#warning1").text("مخاظب اضافه شد");
+                        } else if(response.status_code == "303"){
+
+                            warning1.style.display = "block";
+                            $("#warning1").text("این مخاطب قبلا در جدول مخاطبین اضافه شده");
+                        }else 
+                        {
+                           
+                            warning1.style.display = "block";
+                            $("#warning1").text("مشخصات مخاطب در جدول کانتکت اضافه شد");
                             
 
                         }
