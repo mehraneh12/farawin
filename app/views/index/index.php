@@ -286,7 +286,10 @@
                     },
                     success:function(response) {
                         response = JSON.parse(response);
-                        if(response.status_code == "101"){ 
+                        if(response.status_code == "606"){ 
+                            warning1.style.display = "block";
+                            $("#warning1").text("این مخاطب قبلا با نام دیگری به جدول مخاطبان اضافه شده");
+                        }else if(response.status_code == "101"){ 
                             warning1.style.display = "block";
                             $("#warning1").text("اطلاعات خودتان نمیتواند به جدول مخاطبان اضافه شود");
                         }else if (response.status_code == "404") {

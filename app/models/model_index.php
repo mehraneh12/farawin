@@ -21,10 +21,10 @@ class model_index extends Model
                )
             );
          } else {
-            $contact = $result[0]['id'];
+
 
             $stmt = "SELECT * FROM contact WHERE contactid=?";
-            $params = array($contact);
+            $params = array($result[0]['id']);
             $res = $this->doSelect($stmt, $params);
 
             if (sizeof($res) == 0) {
@@ -38,16 +38,23 @@ class model_index extends Model
                      "status_code" =>  "200"
                   )
                );
-            } else {
+            } else if($res[0]['name'] == $post['contactName']) {
                echo json_encode(
                   array(
-                     "msg" => "not found",
+                     "msg" => "no",
                      "status_code" =>  "303"
                   )
                );
+            } else {
+               echo json_encode(
+                  array(
+                     "msg" => "no",
+                     "status_code" => "606"
+                  )
+               );
+            } 
             }
-         }
-      } else {
+         } else {
 
          echo json_encode(
             array(
