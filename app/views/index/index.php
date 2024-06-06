@@ -190,26 +190,26 @@
             var result = regex.test(phone);
             return result;
         }
-// jQuery(document).ready(function(){
+jQuery(document).ready(function(){
     
-//     $.ajax({
-//                     url: "<?= URL; ?>index/contact_data2",
-//                     type: "POST",
-//                     data: {},
-//                     success: function(response) {
-//                         response = JSON.parse(response);
+    $.ajax({
+                    url: "<?= URL; ?>index/contact_data2",
+                    type: "POST",
+                    data: {},
+                    success: function(response) {
+                        response = JSON.parse(response);
                         
-//                      addContact(response.res);
-//                     },
-//                     error: function(response) {
-//                         alert("خطای 500");
-//                     }
-//                 });
+                     addContact(response.res);
+                    },
+                    error: function(response) {
+                        alert("خطای 500");
+                    }
+                });
              
 
-// });
+});
 function addContact(res) {
-         
+    $("#bodyside ").children().empty();
             for(let i=0;i<=res.length;i++){
                var x= res[i]['name'];
                addHtmlElement(x) ;
