@@ -30,4 +30,12 @@ class Index extends Controller
     
         $this->model->contact_data($_POST);
     }
+    function contact_data2(){
+    
+        $this->model->contact_data2();
+    }
+    function contact_data3(){
+    
+        $this->model->contact_data3();
+    }
 }

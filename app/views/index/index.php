@@ -16,10 +16,19 @@
 
 
     <link rel="stylesheet" href="public/css/style3.css">
+    <style>
+        .liclass {
+            width: 40px;
+            height: 30px;
+
+            color: white;
+            border-bottom: 1px solid lightgray;
+        }
+    </style>
 
 </head>
 
-<body>
+<body id="body">
     <div class="container-fluid h-100">
         <div class="row justify-content-center h-100">
 
@@ -31,74 +40,15 @@
                                 <span class="color ">فراوین</span>
 
                                 <a href="#" id="plus"><i class="fas fa-plus color" onclick="plus()"></i></a>
-                                <a href="#" id="plus"><i class="fas fa-refresh color"></i></a>
+                                <a href="#" ><i class="fas fa-refresh color" id="refresh"></i></a>
 
                             </div>
                         </div>
                     </div>
-                    <div class="card-body contacts_body">
-                        <ui class="contacts">
-                            <li class="active">
-                                <div class="d-flex bd-highlight">
-                                    <div class="img_cont">
-                                        <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
-                                        <span class="online_icon"></span>
-                                    </div>
-                                    <div class="user_info">
-                                        <span>Khalid Charif</span>
-                                        <p>Online</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="d-flex bd-highlight">
-                                    <div class="img_cont">
-                                        <img src="https://2.bp.blogspot.com/-8ytYF7cfPkQ/WkPe1-rtrcI/AAAAAAAAGqU/FGfTDVgkcIwmOTtjLka51vineFBExJuSACLcBGAs/s320/31.jpg" class="rounded-circle user_img">
-                                        <span class="online_icon offline"></span>
-                                    </div>
-                                    <div class="user_info">
-                                        <span>Chaymae Naim</span>
-                                        <p>Left 7 mins ago</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="d-flex bd-highlight">
-                                    <div class="img_cont">
-                                        <img src="https://i.pinimg.com/originals/ac/b9/90/acb990190ca1ddbb9b20db303375bb58.jpg" class="rounded-circle user_img">
-                                        <span class="online_icon"></span>
-                                    </div>
-                                    <div class="user_info">
-                                        <span>Sami Rafi</span>
-                                        <p>Online</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="d-flex bd-highlight">
-                                    <div class="img_cont">
-                                        <img src="https://avatars.hsoubcdn.com/ed57f9e6329993084a436b89498b6088?s=256" class="rounded-circle user_img">
-                                        <span class="online_icon offline"></span>
-                                    </div>
-                                    <div class="user_info">
-                                        <span>Hassan Agmir</span>
-                                        <p>Left 30 mins ago</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="d-flex bd-highlight">
-                                    <div class="img_cont">
-                                        <img src="https://static.turbosquid.com/Preview/001214/650/2V/boy-cartoon-3D-model_D.jpg" class="rounded-circle user_img">
-                                        <span class="online_icon offline"></span>
-                                    </div>
-                                    <div class="user_info">
-                                        <span>Abdou Chatabi</span>
-                                        <p>Left 50 mins ago</p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ui>
+                    <div class="card-body contacts_body" id="bodyside">
+                        <ul class="contacts" id="contact">
+
+                        </ul>
                     </div>
                     <div class="card-footer"></div>
                 </div>
@@ -146,7 +96,7 @@
                                 <span class="msg_time_send">8:55 AM, Today</span>
                             </div>
                             <div class="img_cont_msg">
-                                <img src="https://avatars.hsoubcdn.com/ed57f9e6329993084a436b89498b6088?s=256" class="rounded-circle user_img_msg">
+                                <!-- <img src="https://avatars.hsoubcdn.com/ed57f9e6329993084a436b89498b6088?s=256" class="rounded-circle user_img_msg"> -->
                             </div>
                         </div>
                         <div class="d-flex justify-content-start mb-4">
@@ -164,7 +114,7 @@
                                 <span class="msg_time_send">9:05 AM, Today</span>
                             </div>
                             <div class="img_cont_msg">
-                                <img src="https://avatars.hsoubcdn.com/ed57f9e6329993084a436b89498b6088?s=256" class="rounded-circle user_img_msg">
+                                <!-- <img src="https://avatars.hsoubcdn.com/ed57f9e6329993084a436b89498b6088?s=256" class="rounded-circle user_img_msg"> -->
                             </div>
                         </div>
                         <div class="d-flex justify-content-start mb-4">
@@ -182,7 +132,7 @@
                                 <span class="msg_time_send">9:10 AM, Today</span>
                             </div>
                             <div class="img_cont_msg">
-                                <img src="https://avatars.hsoubcdn.com/ed57f9e6329993084a436b89498b6088?s=256" class="rounded-circle user_img_msg">
+                                <!-- <img src="https://avatars.hsoubcdn.com/ed57f9e6329993084a436b89498b6088?s=256" class="rounded-circle user_img_msg"> -->
                             </div>
                         </div>
                         <div class="d-flex justify-content-start mb-4">
@@ -215,8 +165,8 @@
     <div id="modal">
         <div class="content">
             <form onsubmit="return false">
-            <!-- <i class="fas fa-plus close" id="close"> -->
-           <button type="button" id="close"class="close fas fa-times " style="color:white;outline:none;" ></button><br>
+
+                <button type="button" id="close" class="close fas fa-times " style="color:white;outline:none;"></button><br>
                 <input type="text" placeholder="name" id="name2" class="contact"><br>
                 <input type="text" placeholder=".......0915" id="phone2" class="contact" maxlength="11"><br>
                 <button type="submit" id="add" class="contact">add contact</button><br>
@@ -229,44 +179,106 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="public/js/demo.js"></script>
     <script>
+        var modal = document.getElementById('modal');
+        var plus = document.getElementById('plus');
+        var add = document.getElementById('add');
+        var close = document.getElementById('close');
+        var refresh = document.getElementById('refresh');
+
         function Checkphone(phone) {
             var regex = new RegExp("^(\\+98|0)?9\\d{9}$");
             var result = regex.test(phone);
             return result;
         }
+// jQuery(document).ready(function(){
+    
+//     $.ajax({
+//                     url: "<?= URL; ?>index/contact_data2",
+//                     type: "POST",
+//                     data: {},
+//                     success: function(response) {
+//                         response = JSON.parse(response);
+                        
+//                      addContact(response.res);
+//                     },
+//                     error: function(response) {
+//                         alert("خطای 500");
+//                     }
+//                 });
+             
 
+// });
+function addContact(res) {
+         
+            for(let i=0;i<=res.length;i++){
+               var x= res[i]['name'];
+               addHtmlElement(x) ;
 
-        // اشکار کردن وپنهان کردن مودال در صفحه
-        var modal = document.getElementById('modal');
-        var plus = document.getElementById('plus');
-        var add = document.getElementById('add'); 
-        var close= document.getElementById('close');
-        
-        plus.onclick = function() { 
-            document.getElementById("name2").value="";
-            document.getElementById("phone2").value="";
-            document.getElementById("warning1").style.display="none";
+            }
+        };
+        // function addrRefreshContact(res) {
+           
+        //     var y=$("#contact").li.text
+        //     for(let i=0;i<res.length;i++){
+        //         for(let j=0;j<)
+        //        var x= res[i]['name'];
+        //        addHtmlElement(x) ;
+        //     }
+        // };
+        refresh.onclick = function() { 
+            
+            $.ajax({
+                    url: "<?= URL; ?>index/contact_data2",
+                    type: "POST",
+                    data: {},
+                    success: function(response) {
+                        response = JSON.parse(response);
+                        
+                     addContact(response.res);
+                    },
+                    error: function(response) {
+                        alert("خطای 500");
+                    }
+                });
+            };
+    
+        //وقتی مودال باز یا بسته میشود کل فیلدهای ان پاکسازی میشود
+        plus.onclick = function() {
+            document.getElementById("name2").value = "";
+            document.getElementById("phone2").value = "";
+            document.getElementById("warning1").style.display = "none";
             modal.style.display = 'block';
         };
-        close.onclick = function() {
-           
+        // با زدن دکمه ضربدر داخل مودال -مودال حذف میشود
+        close.onclick = function closeModal() {
             modal.style.display = 'none';
         };
+
+        document.getElementById("name2").onfocus = function() {
+            document.getElementById("name2").value = "";
+            $("#warning1").text("");
+        };
+        document.getElementById("phone2").onfocus = function() {
+            document.getElementById("phone2").value = "";
+            $("#warning1").text("");
+        };
+        //برای نمایش فیزیکی نام و عکس مخاطبین به لیست مخاطبین ساید بار
+        function addHtmlElement($name) {
+            var li = $("<li></li>").text($name);
+            $("#bodyside ").children().append(li);
+            $("li").addClass("liclass");
+            modal.style.display = 'none';
+        };
+
        
-       document.getElementById("name2").onfocus=function() {
-            document.getElementById("name2").value="";
-            $("#warning1").text("");
-       }; 
-       document.getElementById("phone2").onfocus=function() {
-            document.getElementById("phone2").value="";
-            $("#warning1").text("");
-       };
+        // به روز رسانی مخاطبین بصورت کلی(همگام سازی مخاطبین)
+
         // خواندن اطلاعات مودال
         add.onclick = function() {
             var contactName = document.getElementById("name2").value;
             var contactPhone = document.getElementById("phone2").value;
             var warning1 = document.getElementById("warning1");
-           
+
             if (contactName == "" || contactPhone == "") {
                 warning1.style.display = "block";
                 $("#warning1").text("پر کردن تمامی فیلدها الزامیست");
@@ -284,30 +296,31 @@
                         "contactPhone": contactPhone
 
                     },
-                    success:function(response) {
+                    success: function(response) {
                         response = JSON.parse(response);
-                        if(response.status_code == "606"){ 
+                        if (response.status_code == "606") {
                             warning1.style.display = "block";
                             $("#warning1").text("این مخاطب قبلا با نام دیگری به جدول مخاطبان اضافه شده");
-                        }else if(response.status_code == "101"){ 
+                        } else if (response.status_code == "101") {
                             warning1.style.display = "block";
                             $("#warning1").text("اطلاعات خودتان نمیتواند به جدول مخاطبان اضافه شود");
-                        }else if (response.status_code == "404") {
-                                                
+                        } else if (response.status_code == "404") {
+
                             warning1.style.display = "block";
                             $("#warning1").text("مخاطب را به فراوین دعوت کنید");
-                            
-                        } else if(response.status_code == "303"){
+
+                        } else if (response.status_code == "303") {
 
                             warning1.style.display = "block";
                             $("#warning1").text("این مخاطب قبلا در جدول مخاطبین اضافه شده");
-                            
-                        }else 
-                        {
-                           
+
+                        } else {
+
                             warning1.style.display = "block";
-                            $("#warning1").text("مشخصات مخاطب در جدول کانتکت اضافه شد");
-                            
+                            // $("#warning1").text("مشخصات مخاطب در جدول کانتکت اضافه شد");
+                            // alert(response.arrayres);
+                            addHtmlElement(response.arrayres);
+                            // addContact(response.resname);
 
                         }
                     },

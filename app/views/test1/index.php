@@ -6,6 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    
     <link rel="stylesheet" href="public/css/font-awesome.min.css">
     <style>
         * {
@@ -100,26 +104,24 @@
         .chat .footer {
             padding: 5px;
             align-items: center;
+          
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="col-md-4 side">
+        <div class="col-md-4 side"style="padding:0px !important;">
             <div class="header" style="direction: rtl;">
                 <span style="margin-left: auto;padding:5px;border:none">فراوین</span>
-                <a><i class="fa fa-plus-circle" style="color:blue;font-size:28px;margin-left:5px;"></i></a>
-                <a><i class="fa fa-plus-circle" style="color:blue;font-size:28px;"></i></a>
+                <a><i class="fa fa-plus" style="color:gray;font-size:25px;margin-left:5px;"></i></a>
+                <a><i class="fa fa-refresh" style="color:gray;font-size:23px;margin:0 5px;"></i></a>
                 <!-- <a style=" margin-right:5px;padding:5px;border-radius: 50%;border:1px solid black"><i class="fa fa-add"></i></a> -->
 
             </div>
-            <div class="body">
-                <div style="align-items: center !important;padding:5px;"> 
-                    <img src="public/images/1074675991715247274-128.png" alt="" style="width:30px;height:30px;">
-                    <span style="margin-left: auto;padding:5px;border:none">احمد کریمی</span>
-                </div>
-                <div style="align-items: center !important;padding:5px;"> 
+            <div class="body" style="padding:0px;margin:0px;border-radius:0px;  overflow: scroll;">
+               
+                <div style="align-items: center !important;padding:5px;border-radius:0px;margin:0px;right:0;width:100%;"> 
                     <img src="public/images/1074675991715247274-128.png" alt="" style="width:30px;height:30px;">
                     <span style="margin-left: auto;padding:5px;border:none">احمد کریمی</span>
                 </div>
@@ -130,10 +132,10 @@
             <div class="header">
                 <img src="public/images/1074675991715247274-128.png" alt="" style="width:30px;height:30px;">
                 <span style="margin-left: auto;padding:5px;border:none">احمد کریمی</span>
-                <a><i class="fa fa-plus-circle" style="color:blue;font-size:28px;margin-left:5px;"></i></a>
-                <a><i class="fa fa-plus-circle" style="color:blue;font-size:28px;"></i></a>
+                <a><i class="fa fa-edit" style="color:gray;font-size:25px;margin:0 5px;;"></i></a>
+                <a><i class="fa fa-refresh" style="color:gray;font-size:23px;margin:0 6px;"></i></a>
             </div>
-            <div class="body">
+            <div class="body"style="  overflow: scroll;">
                 <div style="display:flex;align-items: center !important;padding:5px;flex-direction:column;border:1px solid gray;width:20%;margin-bottom:5px;"> 
                     <!-- <img src="public/images/1074675991715247274-128.png" alt="" style="width:30px;height:30px;"> -->
                     <span style="margin-left: auto;padding:5px;">سلام خوبی؟</span>
@@ -156,7 +158,7 @@
             </div>
             <div class="footer">
                 <span style="margin-left: auto;padding:5px;border:none;margin-left:auto;">پیام ...</span>
-                <a><i class="fa fa-plus-circle" style="color:blue;font-size:28px;margin-left:5px;"></i></a>
+                <a><i class="fa fa-send" style="color:gray;font-size:28px;margin:0 5px;font-size:22px;"></i></a>
 
             </div>
         </div>
