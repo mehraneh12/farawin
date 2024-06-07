@@ -17,30 +17,7 @@
 
     <link rel="stylesheet" href="public/css/style3.css">
     <style>
-        .liclass {
-            display: flex;
-            justify-content: space-between;
-            flex-direction: row;
-            width: 40px;
-            height: 30px;
-            align-items: center;
-            color: white;
-            border-bottom: 1px solid lightgray;
-        }
 
-        .aclass {
-            background: unset;
-            border: 0;
-
-            font-size: 20px;
-            color: white;
-            cursor: pointer;
-
-        }
-
-        p {
-            margin-bottom: 0px;
-        }
     </style>
 
 </head>
@@ -74,20 +51,20 @@
                 <div class="card">
                     <div class="card-header msg_head">
                         <div class="d-flex bd-highlight">
-                            <div class="img_cont">
+                            <!-- <div class="img_cont">
                                 <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
                                 <span class="online_icon"></span>
-                            </div>
+                            </div> -->
                             <div class="user_info">
-                                <span>khalid Charif</span>
+                                <span id="changeNam1">khalid Charif</span>
                                 <p>1767 Messages</p>
                             </div>
-                            <div class="video_cam">
+                            <!-- <div class="video_cam">
                                 <span><i class="fas fa-video"></i></span>
                                 <span><i class="fas fa-phone"></i></span>
-                            </div>
+                            </div> -->
                         </div>
-                        <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+                        <!-- <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span> -->
                         <div class="action_menu">
                             <ul>
                                 <li><i class="fas fa-user-circle"></i> View profile</li>
@@ -197,8 +174,8 @@
                 <button type="button" id="close1" class="close fas fa-times " style="color:white;outline:none;" onclick="closeModal() "></button><br>
                 <input type="text" placeholder="new name" id="newName" class="contact"><br>
 
-                <button type="submit" id="changeName" class="contact" onclick="changeName(event)">change name</button><br>
-                <span id="warning2" style="display:none;color:white;">b</span>
+                <button type="submit" id="changeName" class="contact">change name</button><br>
+                <span id="warning2" style="display:none;color:white;"></span>
             </form>
         </div>
     </div>
@@ -236,15 +213,23 @@
 
         });
 
-        function changeName(event) {
-            if (("#newName").value == "") {
+        $("#changeName").click(function() {
+            if ($("#newName").val() == "") {
                 warning2.style.display = "block";
                 $("#warning2").text("پر کردن تمامی فیلدها الزامیست");
             } else {
-                event.parentNode.childNodes[1].value = ("#newName").value
-            }
 
-        }
+
+                $("li.active").children("p").text($("#newName").val());
+                $("#changeNam1").text($("#newName").val());
+                document.getElementById("modal1").style.display = 'none';
+
+            }
+        });
+
+
+
+
 
         function addContact(res) {
             $("#bodyside ").children().empty();
@@ -256,16 +241,22 @@
         };
 
         function addHtmlElement($name) {
-            var item = '<p>' + $name + '</p><button class="aclass" ><i class="fa fa-edit aclass" id="edit"  onclick=edit(event)></i> </button>';
-            var li = $("<li></li>").html(item);
-            // var li = $("<li></li>").text($name);
+            var item = '<p>' + $name + '</p><button class="aclass" ><i class="fa fa-edit aclass" id="edit"  onclick=edit()></i> </button>';
+            var li = $("<li ></li>").html(item);
             $("#bodyside ").children().append(li);
-
             $("li").addClass("liclass");
-            // $("#bodyside ").children().append(a);
-            // $("a").addClass("aclass");
+
+
+            $("#contact li").click(function() {
+                $(this).addClass("active").css({
+                    opacity: 0.7
+                }).siblings().removeClass("active");
+                var Nam = $(this).children("p").text();
+                $("#changeNam1").text(Nam );
+            });
             document.getElementById('modal').style.display = 'none';
         };
+
 
         close.onclick = function closeModal() {
             modal.style.display = 'none';
@@ -273,6 +264,8 @@
 
 
         document.getElementById('close1').onclick = function closeModal1() {
+
+
             document.getElementById('modal1').style.display = 'none';
         };
 
@@ -285,11 +278,15 @@
 
 
 
-        function edit(event) {
+        function edit() {
+            // $("#contact i").click(function(){
+            //     $(this).addClass("active").css({opacity:0.7}).siblings().removeClass("active");});
             document.getElementById("newName").value = "";
-            
-            document.getElementById("warning2").style.display = "block";  $("#warning2").text("event");
+
+            document.getElementById("warning2").style.display = "block";
+
             document.getElementById("modal1").style.display = 'block';
+
         };
 
         refresh.onclick = function() {
