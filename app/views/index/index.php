@@ -18,11 +18,28 @@
     <link rel="stylesheet" href="public/css/style3.css">
     <style>
         .liclass {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
             width: 40px;
             height: 30px;
-
+            align-items: center;
             color: white;
             border-bottom: 1px solid lightgray;
+        }
+
+        .aclass {
+            background: unset;
+            border: 0;
+
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+
+        }
+
+        p {
+            margin-bottom: 0px;
         }
     </style>
 
@@ -40,7 +57,7 @@
                                 <span class="color ">فراوین</span>
 
                                 <a href="#" id="plus"><i class="fas fa-plus color" onclick="plus()"></i></a>
-                                <a href="#" ><i class="fas fa-refresh color" id="refresh"></i></a>
+                                <a href="#"><i class="fas fa-refresh color" id="refresh"></i></a>
 
                             </div>
                         </div>
@@ -174,7 +191,17 @@
             </form>
         </div>
     </div>
+    <div id="modal1">
+        <div class="content">
+            <form onsubmit="return false">
+                <button type="button" id="close1" class="close fas fa-times " style="color:white;outline:none;" onclick="closeModal() "></button><br>
+                <input type="text" placeholder="new name" id="newName" class="contact"><br>
 
+                <button type="submit" id="changeName" class="contact" onclick="changeName(event)">change name</button><br>
+                <span id="warning2" style="display:none;color:white;">b</span>
+            </form>
+        </div>
+    </div>
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="public/js/demo.js"></script>
@@ -190,58 +217,98 @@
             var result = regex.test(phone);
             return result;
         }
-jQuery(document).ready(function(){
-    
-    $.ajax({
-                    url: "<?= URL; ?>index/contact_data2",
-                    type: "POST",
-                    data: {},
-                    success: function(response) {
-                        response = JSON.parse(response);
-                        
-                     addContact(response.res);
-                    },
-                    error: function(response) {
-                        alert("خطای 500");
-                    }
-                });
-             
+        jQuery(document).ready(function() {
 
-});
-function addContact(res) {
-    $("#bodyside ").children().empty();
-            for(let i=0;i<=res.length;i++){
-               var x= res[i]['name'];
-               addHtmlElement(x) ;
+            $.ajax({
+                url: "<?= URL; ?>index/contact_data2",
+                type: "POST",
+                data: {},
+                success: function(response) {
+                    response = JSON.parse(response);
+
+                    addContact(response.res);
+                },
+                error: function(response) {
+                    alert("خطای 500");
+                }
+            });
+
+
+        });
+
+        function changeName(event) {
+            if (("#newName").value == "") {
+                warning2.style.display = "block";
+                $("#warning2").text("پر کردن تمامی فیلدها الزامیست");
+            } else {
+                event.parentNode.childNodes[1].value = ("#newName").value
+            }
+
+        }
+
+        function addContact(res) {
+            $("#bodyside ").children().empty();
+            for (let i = 0; i < res.length; i++) {
+
+                addHtmlElement(res[i]['name']);
 
             }
         };
-        // function addrRefreshContact(res) {
-           
-        //     var y=$("#contact").li.text
-        //     for(let i=0;i<res.length;i++){
-        //         for(let j=0;j<)
-        //        var x= res[i]['name'];
-        //        addHtmlElement(x) ;
-        //     }
-        // };
-        refresh.onclick = function() { 
+
+        function addHtmlElement($name) {
+            var item = '<p>' + $name + '</p><button class="aclass" ><i class="fa fa-edit aclass" id="edit"  onclick=edit(event)></i> </button>';
+            var li = $("<li></li>").html(item);
+            // var li = $("<li></li>").text($name);
+            $("#bodyside ").children().append(li);
+
+            $("li").addClass("liclass");
+            // $("#bodyside ").children().append(a);
+            // $("a").addClass("aclass");
+            document.getElementById('modal').style.display = 'none';
+        };
+
+        close.onclick = function closeModal() {
+            modal.style.display = 'none';
+        };
+
+
+        document.getElementById('close1').onclick = function closeModal1() {
+            document.getElementById('modal1').style.display = 'none';
+        };
+
+
+
+
+
+
+
+
+
+
+        function edit(event) {
+            document.getElementById("newName").value = "";
             
+            document.getElementById("warning2").style.display = "block";  $("#warning2").text("event");
+            document.getElementById("modal1").style.display = 'block';
+        };
+
+        refresh.onclick = function() {
+
             $.ajax({
-                    url: "<?= URL; ?>index/contact_data2",
-                    type: "POST",
-                    data: {},
-                    success: function(response) {
-                        response = JSON.parse(response);
-                        
-                     addContact(response.res);
-                    },
-                    error: function(response) {
-                        alert("خطای 500");
-                    }
-                });
-            };
-    
+                url: "<?= URL; ?>index/contact_data2",
+                type: "POST",
+                data: {},
+                success: function(response) {
+                    response = JSON.parse(response);
+
+                    addContact(response.res);
+                },
+                error: function(response) {
+                    alert("خطای 500");
+                }
+            });
+        };
+
         //وقتی مودال باز یا بسته میشود کل فیلدهای ان پاکسازی میشود
         plus.onclick = function() {
             document.getElementById("name2").value = "";
@@ -250,9 +317,7 @@ function addContact(res) {
             modal.style.display = 'block';
         };
         // با زدن دکمه ضربدر داخل مودال -مودال حذف میشود
-        close.onclick = function closeModal() {
-            modal.style.display = 'none';
-        };
+
 
         document.getElementById("name2").onfocus = function() {
             document.getElementById("name2").value = "";
@@ -263,14 +328,8 @@ function addContact(res) {
             $("#warning1").text("");
         };
         //برای نمایش فیزیکی نام و عکس مخاطبین به لیست مخاطبین ساید بار
-        function addHtmlElement($name) {
-            var li = $("<li></li>").text($name);
-            $("#bodyside ").children().append(li);
-            $("li").addClass("liclass");
-            modal.style.display = 'none';
-        };
 
-       
+
         // به روز رسانی مخاطبین بصورت کلی(همگام سازی مخاطبین)
 
         // خواندن اطلاعات مودال
@@ -321,6 +380,7 @@ function addContact(res) {
                             // alert(response.arrayres);
                             addHtmlElement(response.arrayres);
                             // addContact(response.resname);
+
 
                         }
                     },

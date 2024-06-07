@@ -265,7 +265,7 @@ html {direction:rtl;
 	color: white;
 	margin: 0 0.3rem;
 }
-#modal{
+#modal,#modal1{
 	display: none;
 	background-color: rgba(0,0,0,0.3);
 	width: 100%;
