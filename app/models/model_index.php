@@ -33,6 +33,8 @@ class model_index extends Model
                $sql = "INSERT INTO contact(userid,contactid,name) VALUES(?,?,?) ";
                $values = array($_SESSION['id'], $result[0]['id'], $post['contactName']);
                $this->doQuery($sql, $values);
+               // ---------------------------------------------------------------
+               // file_put_contents("meh.json",print_r( $values,true));
 
                //
                $stmt = "SELECT * FROM contact WHERE userid=?";
@@ -43,7 +45,9 @@ class model_index extends Model
                   array(
                      "msg" => "ok",
                      "status_code" =>  "200",
-                     "arrayres" =>  $post['contactName']
+                     "arrayres" =>  $post['contactName'],
+                     "changeid"=> $values[1]
+
 
                   )
                );
@@ -52,7 +56,8 @@ class model_index extends Model
                   array(
                      "msg" => "no",
                      "status_code" =>  "303",
-                     "arrayres" => ""
+                     "arrayres" => "",
+                     "changeid"=> ""
                   )
                );
          }
@@ -94,11 +99,19 @@ class model_index extends Model
       }
    }
 
-   function contact_data3()
+   function contact_data3($post)
 
-   {
-      $stmt = "SELECT * FROM contactphone";file_put_contents("meh.json",print_r( $stmt,true));
-      $params = "SELECT * FROM users" ;
+   {$id=$post['changenametable'];
+       $sql = "UPDATE contact SET name=? where contactid=$id";
+      $values = array($post['changename']);
+      $this->doQuery($sql, $values);  echo json_encode(
+         array(
+            "msg" => "ok"
+            
+         )
+      );
+      // $stmt = "SELECT * FROM contactphone";file_put_contents("meh.json",print_r( $stmt,true));
+      // $params = "SELECT * FROM users" ;
       // $res = $this->doSelect($stmt, $params);
       // if (sizeof($res) != 0) {
       //    file_put_contents("meh.json",print_r( $res,true));

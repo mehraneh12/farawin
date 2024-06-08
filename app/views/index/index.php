@@ -17,7 +17,84 @@
 
     <link rel="stylesheet" href="public/css/style3.css">
     <style>
+.liclass {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	width: 40px;
+	height: 30px;
+	align-items: center;
+	color: white !important;
+	border-bottom: 1px solid lightgray;
+}
 
+.aclass {
+	background: unset;
+	border: 0;
+
+	font-size: 20px;
+	color: white;
+	cursor: pointer;
+
+}
+.active{
+	/* background-color: #696bae; */
+	background-color: #2d116e;
+color:white;
+}
+p {
+	margin-bottom: 0px;
+}
+/* .licl{
+display:none;
+} */
+
+p.id{display:none;}
+#plus{
+ width: 1.8rem;
+ height: 1.8rem;
+
+ border-radius: 50%;
+ /* display: flex; justify-content: flex-start; flex-direction: row-reverse; */
+}
+.color{
+	color: white;
+	margin: 0 0.3rem;
+}
+#modal,#modal1{
+	display: none;
+	background-color: rgba(0,0,0,0.3);
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 1;
+	border-radius: 15px; 
+}
+.content{
+	border-radius: 15px;
+	background-color:rgba(0,0,0,0.9);   
+
+	margin: 15% auto;
+	width: 45%;
+	border-radius: 10px;
+   padding: 5%;
+	text-align: center;
+}
+.contact{ border-radius: 10px;padding: 8px;width:350px;background-color: black;color:#888;
+margin: 3%;  text-align: center;border: 1px solid rgb(8, 223, 126) ;border-radius: 15px;
+}
+#add{width: 150px;color:#888;
+cursor: pointer;border-radius: 15px;outline: none;
+}
+#add:hover{border: 1px solid rgb(2, 71, 40) ;background-color: rgb(8, 223, 126);color: black;box-shadow:2px 4px  15px    rgb(148, 223, 145);}
+.close{
+	display: flex;
+	justify-content: right;
+	text-align: top;
+	color: rgb(8, 223, 126);z-index: 2;background-color: #f1f1f1;border-radius: 50%;
+}
     </style>
 
 </head>
@@ -56,8 +133,8 @@
                                 <span class="online_icon"></span>
                             </div> -->
                             <div class="user_info">
-                                <span id="changeNam1">khalid Charif</span>
-                                <p>1767 Messages</p>
+                                <span id="changeNam1"></span>
+                                <!-- <p></p> -->
                             </div>
                             <!-- <div class="video_cam">
                                 <span><i class="fas fa-video"></i></span>
@@ -76,67 +153,67 @@
                     </div>
                     <div class="card-body msg_card_body">
                         <div class="d-flex justify-content-start mb-4">
-                            <div class="img_cont_msg">
+                            <!-- <div class="img_cont_msg">
                                 <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
                             </div>
                             <div class="msg_cotainer">
                                 Hi, how are you samim?
                                 <span class="msg_time">8:40 AM, Today</span>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="d-flex justify-content-end mb-4">
-                            <div class="msg_cotainer_send">
+                            <!-- <div class="msg_cotainer_send">
                                 Hi Khalid i am good tnx how about you?
                                 <span class="msg_time_send">8:55 AM, Today</span>
                             </div>
                             <div class="img_cont_msg">
-                                <!-- <img src="https://avatars.hsoubcdn.com/ed57f9e6329993084a436b89498b6088?s=256" class="rounded-circle user_img_msg"> -->
-                            </div>
+                                <img src="https://avatars.hsoubcdn.com/ed57f9e6329993084a436b89498b6088?s=256" class="rounded-circle user_img_msg"> 
+                            </div> -->
                         </div>
                         <div class="d-flex justify-content-start mb-4">
-                            <div class="img_cont_msg">
+                            <!-- <div class="img_cont_msg">
                                 <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
                             </div>
                             <div class="msg_cotainer">
                                 I am good too, thank you for your chat template
                                 <span class="msg_time">9:00 AM, Today</span>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="d-flex justify-content-end mb-4">
-                            <div class="msg_cotainer_send">
+                            <!-- <div class="msg_cotainer_send">
                                 You are welcome
                                 <span class="msg_time_send">9:05 AM, Today</span>
                             </div>
-                            <div class="img_cont_msg">
+                            <div class="img_cont_msg"> -->
                                 <!-- <img src="https://avatars.hsoubcdn.com/ed57f9e6329993084a436b89498b6088?s=256" class="rounded-circle user_img_msg"> -->
-                            </div>
+                            <!-- </div> -->
                         </div>
                         <div class="d-flex justify-content-start mb-4">
-                            <div class="img_cont_msg">
+                            <!-- <div class="img_cont_msg">
                                 <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
                             </div>
                             <div class="msg_cotainer">
                                 I am looking for your next templates
                                 <span class="msg_time">9:07 AM, Today</span>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="d-flex justify-content-end mb-4">
-                            <div class="msg_cotainer_send">
+                            <!-- <div class="msg_cotainer_send">
                                 Ok, thank you have a good day
                                 <span class="msg_time_send">9:10 AM, Today</span>
                             </div>
                             <div class="img_cont_msg">
-                                <!-- <img src="https://avatars.hsoubcdn.com/ed57f9e6329993084a436b89498b6088?s=256" class="rounded-circle user_img_msg"> -->
-                            </div>
+                                <img src="https://avatars.hsoubcdn.com/ed57f9e6329993084a436b89498b6088?s=256" class="rounded-circle user_img_msg">
+                            </div> -->
                         </div>
                         <div class="d-flex justify-content-start mb-4">
-                            <div class="img_cont_msg">
+                            <!-- <div class="img_cont_msg">
                                 <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
                             </div>
                             <div class="msg_cotainer">
                                 Bye, see you
                                 <span class="msg_time">9:12 AM, Today</span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="card-footer">
@@ -213,15 +290,46 @@
 
         });
 
+        // add contact------------------------------------------------------------------------------
+        function addContact(res) {
+            $("#bodyside ").children().empty();
+            for (let i = 0; i < res.length; i++) {
+
+                addHtmlElement(res[i]['name'],res[i]['contactid']);
+
+            }
+        };
+        //change name -----------------------------------------------------------------------------------------------------------------
+
         $("#changeName").click(function() {
             if ($("#newName").val() == "") {
                 warning2.style.display = "block";
                 $("#warning2").text("پر کردن تمامی فیلدها الزامیست");
             } else {
+                var changename=$("#newName").val()
 
+                $("li.active").children("p.name").text(changename);
+                $("#changeNam1").text(changename);
+               var changenametable= $("li.active").children("p.id").text();
+          
+                $.ajax({
+                url: "<?= URL; ?>index/contact_data3",
+                type: "POST",
+                data: {
+                    "changename":changename,
+                    "changenametable":changenametable
+                },
+                success: function(response) {
+                    if (response.msg == "ok") {
+                           alert("change name in table was succesfully");
+                }
+                    
+                },
+                error: function(response) {
+                    alert("خطای 500");
+                }
+            });
 
-                $("li.active").children("p").text($("#newName").val());
-                $("#changeNam1").text($("#newName").val());
                 document.getElementById("modal1").style.display = 'none';
 
             }
@@ -231,27 +339,20 @@
 
 
 
-        function addContact(res) {
-            $("#bodyside ").children().empty();
-            for (let i = 0; i < res.length; i++) {
+       
 
-                addHtmlElement(res[i]['name']);
-
-            }
-        };
-
-        function addHtmlElement($name) {
-            var item = '<p>' + $name + '</p><button class="aclass" ><i class="fa fa-edit aclass" id="edit"  onclick=edit()></i> </button>';
+        function addHtmlElement($name ,$changeid) {
+            var item = '<p class="id">' + $changeid + '</p><p class="name">' + $name + '</p><button class="aclass" ><i class="fa fa-edit aclass" id="edit"  onclick=edit()></i> </button>';
             var li = $("<li ></li>").html(item);
             $("#bodyside ").children().append(li);
             $("li").addClass("liclass");
 
-
+            $("li").children("p.id").addClass("licl");
             $("#contact li").click(function() {
                 $(this).addClass("active").css({
                     opacity: 0.7
                 }).siblings().removeClass("active");
-                var Nam = $(this).children("p").text();
+                var Nam = $(this).children("p.name").text();
                 $("#changeNam1").text(Nam );
             });
             document.getElementById('modal').style.display = 'none';
@@ -375,7 +476,8 @@
                             warning1.style.display = "block";
                             // $("#warning1").text("مشخصات مخاطب در جدول کانتکت اضافه شد");
                             // alert(response.arrayres);
-                            addHtmlElement(response.arrayres);
+                            alert(response.changeid);
+                            addHtmlElement(response.arrayres ,response.changeid);
                             // addContact(response.resname);
 
 
