@@ -15,10 +15,10 @@
     <form class="login" onsubmit="return false;">
         <h1>register</h1>
         <div id="div">
-            <!-- <label for="username" id="lable">+98</label> -->
+          
             <input type="text" id="username" placeholder="091533....." maxlength="11" required>
         </div>
-        <!-- <input type="text" id="username" placeholder="091533....." maxlength="10" required> -->
+      
         <input type="password" id="password" placeholder="   password" required>
 
         <input type="password" id="rpassword" placeholder="config-password" required>
@@ -28,9 +28,6 @@
 
         </div>
 
-        <!-- <span>
-            <input type="checkbox"> من را به خاطر بسپار
-        </span> -->
         <span id="showerror" style="visibility: hidden;"></span>
 
 
@@ -84,20 +81,18 @@
 
 
         ///شروع
+        // با زدن کلید رجیستر تابع زیر اجرا میشود و اطلاعات در جدول یوزر ثبت میشود
         $("#btn").on('click', function() {
             var username = document.getElementById("username").value;
 
             var password = document.getElementById("password").value;
 
             var rpassword = document.getElementById("rpassword").value;
-
+// شروع اعتبار سنجی فیلدها
             if (Checkphone(username) == false) {
                 document.getElementById("showerror").style.visibility = "visible";
                 $("#showerror").text(" فرمت موبایل رعایت نشده است")
-                // } else if (username == "" || password == "" || rpassword == "") {
-
-                //     document.getElementById("showerror").style.visibility = "visible";
-                //     $("#showerror").text("پر کردن تمام فیلدها الزامی است");
+                
             } else if (password !== rpassword) {
                 document.getElementById("showerror").style.visibility = "visible";
                 $("#showerror").text("تکرار پسورد اشتباه است");
@@ -107,6 +102,8 @@
                 $("#showerror").text(" پسورد باید بین 6 تا 20 کاراکتر و شامل حروف کوچک و بزرگ انگلیسی , اعداد باشد");
                 document.getElementById("password").value = "";
                 document.getElementById("rpassword").value = "";
+// پایان اعتبار سنجی فیلدها 
+// و شروع عملیات ار سال و اضافه کردن اطلاعات به جدول
             } else {
                 $.ajax({
                     url: "<?= URL; ?>register/insert_data",
@@ -119,14 +116,17 @@
                     success: function(response) {
                         response = JSON.parse(response);
                         if (response.status_code == "404") {
+                            // خطای 404 یعنی کاربر قبلا ثبت نام کرده
                             window.location = "<?= URL; ?>login";
                         } else {
                             checkregister = "ok";
+                            // عملیات ثبت نام کاربر با موفقیت انجام شد
                             window.location = "<?= URL; ?>login";
                         }
                     },
                     error: function(response) {
                         alert("خطای 500");
+                        // خطای 500 یعنی نقص فنی در ارسال ایجکس وجود دارد
                     }
                 });
             }

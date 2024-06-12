@@ -19,13 +19,13 @@ class model_register extends model
                      $result = $this->doSelect($sql, $values);
 
                      if (sizeof($result) == 0) {
-                        $sql = "INSERT INTO users (username,password,rpassword) VALUES(?,?,?) ";
-                        $values = array($post['username'], md5($post['password']), md5($post['rpassword']));
+                        $sql = "INSERT INTO users (username,password,register_date) VALUES(?,?,?) ";
+                        $values = array($post['username'], md5($post['password']), self::jalali_date("Y/m/d"));
                         $this->doQuery($sql, $values);
                        
                         echo json_encode(
                            array(
-                              "msg" => "ok",
+                              // "msg" => "ok",
                               "status_code" =>  "200"
                            )
                         );
@@ -33,7 +33,7 @@ class model_register extends model
 
                         echo json_encode(
                            array(
-                              "msg" => "not found",
+                              // "msg" => "not found",
                               "status_code" =>  "404"
                            )
                         );

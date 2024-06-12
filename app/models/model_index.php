@@ -48,7 +48,7 @@ class model_index extends Model
                      "arrayres" =>  $post['contactName'],
                      "changeid"=> $values[1]
 
-
+                     // "changeid"=> md5($values[1])
                   )
                );
             } else
@@ -110,27 +110,6 @@ class model_index extends Model
             
          )
       );
-      // $stmt = "SELECT * FROM contactphone";file_put_contents("meh.json",print_r( $stmt,true));
-      // $params = "SELECT * FROM users" ;
-      // $res = $this->doSelect($stmt, $params);
-      // if (sizeof($res) != 0) {
-      //    file_put_contents("meh.json",print_r( $res,true));
-      //    echo json_encode(
-      //       array(
-      //          "msg" => "ok",
-      //          "status_code" =>  "200",
-      //          "res" => $res
-
-      //       )
-      //    );
-      // } else {
-      //    echo json_encode(
-      //       array(
-      //          "msg" => "no",
-      //          "status_code" =>  "303",
-      //          "res" => ""
-      //       )
-      //    );
-      // }
+      
    }
 }

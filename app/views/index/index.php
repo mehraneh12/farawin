@@ -260,6 +260,9 @@ cursor: pointer;border-radius: 15px;outline: none;
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="public/js/demo.js"></script>
     <script>
+// جلوگیری از تداخل جی کویری با کتابخانه های دیگری که از علامت مشابه $ استفاده میکنند با دو خط پایین
+    // $.noConflict();
+    // jQuery(document).ready(function($){
         var modal = document.getElementById('modal');
         var plus = document.getElementById('plus');
         var add = document.getElementById('add');
@@ -489,6 +492,8 @@ cursor: pointer;border-radius: 15px;outline: none;
                 });
             }
         };
+
+    // }) ;
     </script>
 </body>
 
