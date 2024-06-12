@@ -21,7 +21,7 @@
       
         <input type="password" id="password" placeholder="   password" required>
 
-        <input type="password" id="rpassword" placeholder="config-password" required>
+        <input type="password" id="configPassword" placeholder="config-password" required>
         <div>
             <a href="login">login</a>
             <button type="submit" id="btn">register</button>
@@ -87,21 +87,21 @@
 
             var password = document.getElementById("password").value;
 
-            var rpassword = document.getElementById("rpassword").value;
+            var configPassword = document.getElementById("configPassword").value;
 // شروع اعتبار سنجی فیلدها
             if (Checkphone(username) == false) {
                 document.getElementById("showerror").style.visibility = "visible";
                 $("#showerror").text(" فرمت موبایل رعایت نشده است")
                 
-            } else if (password !== rpassword) {
+            } else if (password !== configPassword) {
                 document.getElementById("showerror").style.visibility = "visible";
                 $("#showerror").text("تکرار پسورد اشتباه است");
-                document.getElementById("rpassword").value = "";
+                document.getElementById("configPassword").value = "";
             } else if (CheckPassword(password) == false) {
                 document.getElementById("showerror").style.visibility = "visible";
                 $("#showerror").text(" پسورد باید بین 6 تا 20 کاراکتر و شامل حروف کوچک و بزرگ انگلیسی , اعداد باشد");
                 document.getElementById("password").value = "";
-                document.getElementById("rpassword").value = "";
+                document.getElementById("configPassword").value = "";
 // پایان اعتبار سنجی فیلدها 
 // و شروع عملیات ار سال و اضافه کردن اطلاعات به جدول
             } else {
@@ -111,7 +111,7 @@
                     data: {
                         "username": username,
                         "password": password,
-                        "rpassword": rpassword
+                        "configPassword": configPassword
                     },
                     success: function(response) {
                         response = JSON.parse(response);

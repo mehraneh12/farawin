@@ -10,9 +10,9 @@ class model_register extends model
    {
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-         if (isset($post['username']) and isset($post['password']) and isset($post['rpassword'])) {
-            if (!empty($post['username']) and !empty($post['password']) and !empty($post['rpassword'])) {
-               if ($post['password'] == $post['rpassword']) {
+         if (isset($post['username']) and isset($post['password']) and isset($post['configPassword'])) {
+            if (!empty($post['username']) and !empty($post['password']) and !empty($post['configPassword'])) {
+               if ($post['password'] == $post['configPassword']) {
                   if (strlen($post['password']) >= 6 && strlen($post['password']) <20) {
                      $sql = "SELECT * FROM users WHERE username=? ";
                      $values = array($post['username']);
