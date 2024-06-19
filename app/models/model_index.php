@@ -7,7 +7,7 @@ class model_index extends Model
    {
       parent::__construct();
    }
-   function contact_data($post)
+   function add_contact_data($post)
 
    {
       $sql = "SELECT * FROM users WHERE username=?";
@@ -37,18 +37,19 @@ class model_index extends Model
                // file_put_contents("meh.json",print_r( $values,true));
 
                //
-               $stmt = "SELECT * FROM contact WHERE userid=?";
-               $params = array($_SESSION['id']);
-               $res = $this->doSelect($stmt, $params);
+               // $stmt = "SELECT * FROM contact WHERE userid=?";
+               // $params = array($_SESSION['id']);
+               // $res = $this->doSelect($stmt, $params);
 
                echo json_encode(
                   array(
                      "msg" => "ok",
                      "status_code" =>  "200",
                      "arrayres" =>  $post['contactName'],
-                     "changeid"=> $values[1]
+                     // "changeid"=>base64_encode($values[1]) 
+                     // مقدار مورد نظر را رمزنگاری میکند
 
-                     // "changeid"=> md5($values[1])
+                     "changeid"=> $values[1]
                   )
                );
             } else
@@ -72,7 +73,7 @@ class model_index extends Model
       }
    }
 
-   function contact_data2()
+   function update_contact_data()
 
    {
       $stmt = "SELECT * FROM contact WHERE userid=?";
@@ -99,12 +100,15 @@ class model_index extends Model
       }
    }
 
-   function contact_data3($post)
+   function change_contact_data($post)
 
-   {$id=$post['changenametable'];
-       $sql = "UPDATE contact SET name=? where contactid=$id";
+   {
+   //   $id=base64_decode($post['changenametable']) ; //مقدار رمز نگاری شده را رمز گشایی میکند
+     $id= $post['changenametable'];
+   $sql = "UPDATE contact SET name=? where contactid=$id";
       $values = array($post['changename']);
-      $this->doQuery($sql, $values);  echo json_encode(
+      $this->doQuery($sql, $values); 
+       echo json_encode(
          array(
             "msg" => "ok"
             
@@ -112,4 +116,31 @@ class model_index extends Model
       );
       
    }
+
+
+//   function saveChat($post){
+//    $message=$post['message'];
+//   }
+
+
+   
+function chat($post)
+{
+
+$message = $post['message'];
+$contactid = $post['contactid'];
+
+$sql = "SELECT * FROM message WHERE sendId=? AND getId=? AND text=?";
+$params = array($_SESSION['id'], $contactid, $message);
+$result = $this->doSelect($sql, $params);
+
+if (sizeof($result) > 0) {
+ echo json_encode(array("msg" => "This message already exists in the database."));
+} else {
+ $sql = "INSERT INTO message (sendId, getId, text) VALUES (?, ?, ?)";
+ $values = array($_SESSION['id'], $contactid, $message);
+ $this->doQuery($sql, $values);
+ echo json_encode(array("msg" => "Message inserted successfully."));
+}
+}
 }

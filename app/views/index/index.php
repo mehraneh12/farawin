@@ -16,87 +16,7 @@
 
 
     <link rel="stylesheet" href="public/css/style3.css">
-    <style>
-.liclass {
-	display: flex;
-	justify-content: space-between;
-	flex-direction: row;
-	width: 40px;
-	height: 30px;
-	align-items: center;
-	color: white !important;
-	border-bottom: 1px solid lightgray;
-}
-
-.aclass {
-	background: unset;
-	border: 0;
-
-	font-size: 20px;
-	color: white;
-	cursor: pointer;
-
-}
-.active{
-	/* background-color: #696bae; */
-	background-color: #2d116e;
-color:white;
-}
-p {
-	margin-bottom: 0px;
-}
-/* .licl{
-display:none;
-} */
-
-p.id{display:none;}
-#plus{
- width: 1.8rem;
- height: 1.8rem;
-
- border-radius: 50%;
- /* display: flex; justify-content: flex-start; flex-direction: row-reverse; */
-}
-.color{
-	color: white;
-	margin: 0 0.3rem;
-}
-#modal,#modal1{
-	display: none;
-	background-color: rgba(0,0,0,0.3);
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	left: 0;
-	top: 0;
-	z-index: 1;
-	border-radius: 15px; 
-}
-.content{
-	border-radius: 15px;
-	background-color:rgba(0,0,0,0.9);   
-
-	margin: 15% auto;
-	width: 45%;
-	border-radius: 10px;
-   padding: 5%;
-	text-align: center;
-}
-.contact{ border-radius: 10px;padding: 8px;width:350px;background-color: black;color:#888;
-margin: 3%;  text-align: center;border: 1px solid rgb(8, 223, 126) ;border-radius: 15px;
-}
-#add{width: 150px;color:#888;
-cursor: pointer;border-radius: 15px;outline: none;
-}
-#add:hover{border: 1px solid rgb(2, 71, 40) ;background-color: rgb(8, 223, 126);color: black;box-shadow:2px 4px  15px    rgb(148, 223, 145);}
-.close{
-	display: flex;
-	justify-content: right;
-	text-align: top;
-	color: rgb(8, 223, 126);z-index: 2;background-color: #f1f1f1;border-radius: 50%;
-}
-    </style>
-
+   
 </head>
 
 <body id="body">
@@ -110,7 +30,7 @@ cursor: pointer;border-radius: 15px;outline: none;
                             <div class="input-group-prepend" style="display: flex;align-items:center;justify-content:space-between;">
                                 <span class="color ">فراوین</span>
 
-                                <a href="#" id="plus"><i class="fas fa-plus color" onclick="plus()"></i></a>
+                                <a href="#" id="plus"><i class="fas fa-plus color" ></i></a>
                                 <a href="#"><i class="fas fa-refresh color" id="refresh"></i></a>
 
                             </div>
@@ -218,11 +138,13 @@ cursor: pointer;border-radius: 15px;outline: none;
                     </div>
                     <div class="card-footer">
                         <div class="input-group">
-                            <div class="input-group-append">
-                                <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
+ <!--######################## sendMessage######################## -->
+
+                            <div class="input-group-append " id="sendMessage" >
+                                <span class="input-group-text send_btn "><i class="fas fa-location-arrow "></i></span>
                             </div>
 
-                            <textarea name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
+                            <textarea name="" class="form-control type_msg" placeholder="Type your message..." id="message"></textarea>
                             <div class="input-group-append">
                                 <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
                             </div>
@@ -232,8 +154,8 @@ cursor: pointer;border-radius: 15px;outline: none;
             </div>
         </div>
     </div>
-    <!-- modal -->
-    <div id="modal">
+    <!-- modalAdd add ********************************************************************-->
+    <div id="modalAdd">
         <div class="content">
             <form onsubmit="return false">
 
@@ -245,7 +167,8 @@ cursor: pointer;border-radius: 15px;outline: none;
             </form>
         </div>
     </div>
-    <div id="modal1">
+<!-- modal change *************************************************************************** -->
+    <div id="modalChange">
         <div class="content">
             <form onsubmit="return false">
                 <button type="button" id="close1" class="close fas fa-times " style="color:white;outline:none;" onclick="closeModal() "></button><br>
@@ -263,177 +186,38 @@ cursor: pointer;border-radius: 15px;outline: none;
 // جلوگیری از تداخل جی کویری با کتابخانه های دیگری که از علامت مشابه $ استفاده میکنند با دو خط پایین
     // $.noConflict();
     // jQuery(document).ready(function($){
-        var modal = document.getElementById('modal');
+        var modalAdd = document.getElementById('modalAdd');
         var plus = document.getElementById('plus');
         var add = document.getElementById('add');
         var close = document.getElementById('close');
         var refresh = document.getElementById('refresh');
-
+// اعتبار سنجی شماره تلفن
         function Checkphone(phone) {
             var regex = new RegExp("^(\\+98|0)?9\\d{9}$");
             var result = regex.test(phone);
             return result;
         }
-        jQuery(document).ready(function() {
 
-            $.ajax({
-                url: "<?= URL; ?>index/contact_data2",
-                type: "POST",
-                data: {},
-                success: function(response) {
-                    response = JSON.parse(response);
-
-                    addContact(response.res);
-                },
-                error: function(response) {
-                    alert("خطای 500");
-                }
-            });
-
-
-        });
-
-        // add contact------------------------------------------------------------------------------
-        function addContact(res) {
-            $("#bodyside ").children().empty();
-            for (let i = 0; i < res.length; i++) {
-
-                addHtmlElement(res[i]['name'],res[i]['contactid']);
-
-            }
-        };
-        //change name -----------------------------------------------------------------------------------------------------------------
-
-        $("#changeName").click(function() {
-            if ($("#newName").val() == "") {
-                warning2.style.display = "block";
-                $("#warning2").text("پر کردن تمامی فیلدها الزامیست");
-            } else {
-                var changename=$("#newName").val()
-
-                $("li.active").children("p.name").text(changename);
-                $("#changeNam1").text(changename);
-               var changenametable= $("li.active").children("p.id").text();
-          
-                $.ajax({
-                url: "<?= URL; ?>index/contact_data3",
-                type: "POST",
-                data: {
-                    "changename":changename,
-                    "changenametable":changenametable
-                },
-                success: function(response) {
-                    if (response.msg == "ok") {
-                           alert("change name in table was succesfully");
-                }
-                    
-                },
-                error: function(response) {
-                    alert("خطای 500");
-                }
-            });
-
-                document.getElementById("modal1").style.display = 'none';
-
-            }
-        });
-
-
-
-
-
-       
-
-        function addHtmlElement($name ,$changeid) {
-            var item = '<p class="id">' + $changeid + '</p><p class="name">' + $name + '</p><button class="aclass" ><i class="fa fa-edit aclass" id="edit"  onclick=edit()></i> </button>';
-            var li = $("<li ></li>").html(item);
-            $("#bodyside ").children().append(li);
-            $("li").addClass("liclass");
-
-            $("li").children("p.id").addClass("licl");
-            $("#contact li").click(function() {
-                $(this).addClass("active").css({
-                    opacity: 0.7
-                }).siblings().removeClass("active");
-                var Nam = $(this).children("p.name").text();
-                $("#changeNam1").text(Nam );
-            });
-            document.getElementById('modal').style.display = 'none';
-        };
-
-
-        close.onclick = function closeModal() {
-            modal.style.display = 'none';
-        };
-
-
-        document.getElementById('close1').onclick = function closeModal1() {
-
-
-            document.getElementById('modal1').style.display = 'none';
-        };
-
-
-
-
-
-
-
-
-
-
-        function edit() {
-            // $("#contact i").click(function(){
-            //     $(this).addClass("active").css({opacity:0.7}).siblings().removeClass("active");});
-            document.getElementById("newName").value = "";
-
-            document.getElementById("warning2").style.display = "block";
-
-            document.getElementById("modal1").style.display = 'block';
-
-        };
-
-        refresh.onclick = function() {
-
-            $.ajax({
-                url: "<?= URL; ?>index/contact_data2",
-                type: "POST",
-                data: {},
-                success: function(response) {
-                    response = JSON.parse(response);
-
-                    addContact(response.res);
-                },
-                error: function(response) {
-                    alert("خطای 500");
-                }
-            });
-        };
-
-        //وقتی مودال باز یا بسته میشود کل فیلدهای ان پاکسازی میشود
-        plus.onclick = function() {
+          //وقتی مودال باز یا بسته میشود کل فیلدهای ان پاکسازی میشود
+          plus.onclick = function() {
             document.getElementById("name2").value = "";
             document.getElementById("phone2").value = "";
             document.getElementById("warning1").style.display = "none";
-            modal.style.display = 'block';
+            modalAdd.style.display = 'block';
         };
-        // با زدن دکمه ضربدر داخل مودال -مودال حذف میشود
-
-
+//خالی کردن اینپوت ها در هنگام فوکوس
         document.getElementById("name2").onfocus = function() {
             document.getElementById("name2").value = "";
             $("#warning1").text("");
         };
+        // خالی کردن اینپوت ها در هنگام فوکوس
         document.getElementById("phone2").onfocus = function() {
             document.getElementById("phone2").value = "";
             $("#warning1").text("");
         };
-        //برای نمایش فیزیکی نام و عکس مخاطبین به لیست مخاطبین ساید بار
+       
 
-
-        // به روز رسانی مخاطبین بصورت کلی(همگام سازی مخاطبین)
-
-        // خواندن اطلاعات مودال
+        //add_contact_data// اطلاعات مخاطبین را از مودال میگیرد و توسط تابع addHtmlElementبه ساید بار اضافه میکند  
         add.onclick = function() {
             var contactName = document.getElementById("name2").value;
             var contactPhone = document.getElementById("phone2").value;
@@ -449,7 +233,7 @@ cursor: pointer;border-radius: 15px;outline: none;
             } else {
 
                 $.ajax({
-                    url: "<?= URL; ?>index/contact_data",
+                    url: "<?= URL; ?>index/add_contact_data",
                     type: "POST",
                     data: {
                         "contactName": contactName,
@@ -477,13 +261,8 @@ cursor: pointer;border-radius: 15px;outline: none;
                         } else {
 
                             warning1.style.display = "block";
-                            // $("#warning1").text("مشخصات مخاطب در جدول کانتکت اضافه شد");
-                            // alert(response.arrayres);
-                            alert(response.changeid);
+                            
                             addHtmlElement(response.arrayres ,response.changeid);
-                            // addContact(response.resname);
-
-
                         }
                     },
                     error: function(response) {
@@ -493,7 +272,164 @@ cursor: pointer;border-radius: 15px;outline: none;
             }
         };
 
-    // }) ;
+
+       //update_contact_data // به روزرسانی مخاطبین با اماده شدن سند برنامه
+        jQuery(document).ready(function() {
+
+            $.ajax({
+                url: "<?= URL; ?>index/update_contact_data",
+                type: "POST",
+                data: {},
+                success: function(response) {
+                    response = JSON.parse(response);
+
+                    addContact(response.res);
+                },
+                error: function(response) {
+                    alert("خطای 500");
+                }
+            });
+
+
+        });
+
+        //addHtmlElement------------------------------------------------------------------------------
+        // مخاطبین را تک به تک به تابع اد اچ تی ام ال میفرستد تا در نوار ساید بار به نمایش در بیایند
+        function addContact(res) {
+            $("#bodyside ").children().empty();
+            for (let i = 0; i < res.length; i++) {
+
+                addHtmlElement(res[i]['name'],res[i]['contactid']);
+
+            }
+        };
+        //change_contact_data-----------------------------------------------------------------------------------------------------------------
+// نام جدید مخاطب را گرفته و در لیست مخاطبین و هدر کانتینر و در جدول کانتکت انرا تغییر می دهد
+        $("#changeName").click(function() {
+            if ($("#newName").val() == "") {
+                warning2.style.display = "block";
+                $("#warning2").text("پر کردن تمامی فیلدها الزامیست");
+            } else {
+                var changename=$("#newName").val();
+
+                $("li.active").children("p.name").text(changename);
+                $("#changeNam1").text(changename);
+                // شروع : تغییر دادن در جدول مخاطبین 
+                // console.log($("li.active").children("p.id").text());
+               var changenametable= $("li.active").children("p.id").text();
+          
+                $.ajax({
+                url: "<?= URL; ?>index/change_contact_data",
+                type: "POST",
+                data: {
+                    "changename":changename,
+                    "changenametable":changenametable
+                },
+                success: function(response) {
+                    response = JSON.parse(response);
+                    if (response.msg == "ok") {
+                           alert("change name in table was succesfully");
+                }
+                    
+                },
+                error: function(response) {
+                    alert("خطای 500");
+                }
+            });
+                document.getElementById("modalChange").style.display = 'none';
+            }
+        });
+ // مخاطب را در ساید بار به نمایش در می اورد
+ function addHtmlElement($name ,$changeid) {
+var i=j=0;
+    // alert($name +$changeid);
+            var item = '<p class="id">' + $changeid + '</p><p class="name">' + $name + '</p><button class="aclass" ><i class="fa fa-edit aclass" id="edit"  onclick=edit()></i> </button>';
+            var li = $("<li ></li>").html(item);
+            // $("#bodyside ").children().append(li);
+            $("#contact").append(li);
+            $("li").addClass("liclass");
+             $("li").children("p.id").hide();
+            $("#modalAdd").css("display", "none");
+            //فعال کردن یک مخاطب با کلیک کردن  بر روی ان وباز کردن صفحه چت با این مخاطب######################
+        // ##########################################################################################
+            $("li").click(function() { 
+                i++;
+             
+                $(this).addClass("active").css({opacity: 0.7}).siblings().removeClass("active");
+                var Nam =$(".active").children("p.name").text();
+                $("#changeNam1").text(Nam );
+                          
+                // start  
+
+                // alert($(".active p.id").text());
+                var contactid=$(".active").children().first().text();
+                j++;
+               console.log(Nam+"  " +contactid+"  "+"i="+i+"   "+"j="+j);
+                // فرستادن اطلاعات کانتکت و متن پیام ارسالی برای ثبت در جدول مسیج
+                var isMessageSent = false;// فرستادن اطلاعات کانتکت و متن پیام ارسالی برای ثبت در جدول مسیج
+                $("#sendMessage").click( function() {
+                    if (!isMessageSent) {
+                       var message = $("#message").val();
+                       var contactid=$(".active").children().first().text();
+                      i++;
+               // نمایش محتوای اولین فرزند داخل یک المان li
+               $.ajax({
+                      url: "<?=URL;?>index/chat",
+                      type: "POST",
+                      data: {
+                              "contactid":contactid,
+                               "message":message
+                            },
+                       success: function(response) {
+                                                        response = JSON.parse(response);
+                                                        if (response.msg == "ok") {
+                                                            alert("message added successfuly");
+                                                            isMessageSent = true;
+								                               }
+                                                           
+                                                          
+                                                        
+
+                                                   },
+                      error: function(response) {
+                                                        alert("خطای 500");
+                                                 }
+                     });
+                    };
+                });
+                    
+            });
+    };
+
+    
+
+
+// مودال اضافه کردن مخاطب را پنهان میکند
+        close.onclick = function closeModal() {
+            modalAdd.style.display = 'none';
+        };
+
+// مودال تغییر نام را پنهان میکند
+        document.getElementById('close1').onclick = function closemodalChange() {
+            document.getElementById('modalChange').style.display = 'none';
+        };
+
+
+// با زدن دکمه ادیت فیلد نام خالی میشود و مودال نمایش داده میشود
+        function edit() {
+            document.getElementById("newName").value = "";
+            document.getElementById("warning2").style.display = "block";
+            document.getElementById("modalChange").style.display = 'block';
+
+        };
+
+       
+
+      
+
+
+        
+
     </script>
 </body>
 

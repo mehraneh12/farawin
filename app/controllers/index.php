@@ -20,22 +20,28 @@ class Index extends Controller
 
     function index()
     {
-        //        $widget = $this->model->getWidget($this->checkLogin);
-        //        $data = array('widget' => $widget);
-
-        //        $this->view('index/index', $data);
+        
         $this->view('index/index');
     }
-    function contact_data(){
+    function add_contact_data(){
     
-        $this->model->contact_data($_POST);
+        $this->model->add_contact_data($_POST);
     }
-    function contact_data2(){
+    function update_contact_data(){
     
-        $this->model->contact_data2();
+        $this->model->update_contact_data();
     }
-    function contact_data3(){
+    function change_contact_data(){
     
-        $this->model->contact_data3($_POST);
+        $this->model->change_contact_data($_POST);
+    }
+
+    function saveChat(){
+    
+        $this->model->saveChat($_POST);
+    }
+    function chat(){
+    
+        $this->model->chat($_POST);
     }
 }
