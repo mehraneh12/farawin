@@ -45,11 +45,11 @@ class model_index extends Model
                   array(
                      "msg" => "ok",
                      "status_code" =>  "200",
-                     "arrayres" =>  $post['contactName'],
+                     "contactName" =>  $post['contactName'],
                      // "changeid"=>base64_encode($values[1]) 
                      // مقدار مورد نظر را رمزنگاری میکند
 
-                     "changeid"=> $values[1]
+                     "contactid"=> $values[1]
                   )
                );
             } else
@@ -123,24 +123,40 @@ class model_index extends Model
 //   }
 
 
-   
-function chat($post)
-{
+   function chat($post)
+   {
 
 $message = $post['message'];
 $contactid = $post['contactid'];
-
-$sql = "SELECT * FROM message WHERE sendId=? AND getId=? AND text=?";
-$params = array($_SESSION['id'], $contactid, $message);
-$result = $this->doSelect($sql, $params);
-
-if (sizeof($result) > 0) {
- echo json_encode(array("msg" => "This message already exists in the database."));
-} else {
- $sql = "INSERT INTO message (sendId, getId, text) VALUES (?, ?, ?)";
- $values = array($_SESSION['id'], $contactid, $message);
- $this->doQuery($sql, $values);
- echo json_encode(array("msg" => "Message inserted successfully."));
+    $sql = "INSERT INTO message (sendId, getId, text,date) VALUES (?, ?, ?,?)";
+   //  $values = array($_SESSION['id'], $contactid, $message,self::jalali_date("Y/m/d  H:i:s")); 
+    $values = array($_SESSION['id'], $contactid, $message,self::jalali_date("  H:i")); 
+    $this->doQuery($sql, $values);
+    echo json_encode(array("msg" => "ok")); 
+ 
+// }
 }
+
+
+function viewchat($post){
+   $contactid = $post['contactid'];
+   $userid=$_SESSION['id'];
+
+   $sql = "SELECT * FROM message WHERE (sendId=? AND getId=?) OR ( sendId=? AND getId=? )";
+$params = array($userid, $contactid,$contactid,$userid);
+$arrayMessages = $this->doSelect($sql, $params);
+file_put_contents("meh.json",print_r( $arrayMessages,true));
+
+if (sizeof($arrayMessages) > 0) {
+   echo json_encode(
+      array(
+      "arrayMessages" => $arrayMessages, 
+       "userid"=>$userid,
+      "contactid"=> $contactid
+     
+));
+}
+     
+   
 }
 }

@@ -44,4 +44,8 @@ class Index extends Controller
     
         $this->model->chat($_POST);
     }
+    function viewchat(){
+    
+        $this->model->viewchat($_POST);
+    }
 }

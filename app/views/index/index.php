@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -16,7 +17,17 @@
 
 
     <link rel="stylesheet" href="public/css/style3.css">
-   
+    <style>
+        .active{
+		background-color:rgba(45, 43, 84,0.3);
+    }
+    .x{
+    }
+    .y{
+        
+    }
+    
+    </style>
 </head>
 
 <body id="body">
@@ -71,7 +82,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="card-body msg_card_body">
+                    <div class="card-body msg_card_body" id="msg-card_body">
                         <div class="d-flex justify-content-start mb-4">
                             <!-- <div class="img_cont_msg">
                                 <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
@@ -164,6 +175,7 @@
                 <input type="text" placeholder=".......0915" id="phone2" class="contact" maxlength="11"><br>
                 <button type="submit" id="add" class="contact">add contact</button><br>
                 <span id="warning1" style="color: white;display:none;">bbbbbbbbbbb</span>
+                <input type="hidden" id="hiddenInput">
             </form>
         </div>
     </div>
@@ -179,10 +191,29 @@
             </form>
         </div>
     </div>
+
+
+
+    <div id="t">
+    <div id="1">1</div>
+    <div id="2">2</div>
+    <div id="3">3</div>
+    <div id="4">4</div>
+    <div id="5">5</div>
+    <div id="6">6</div>
+    <div id="7">7</div>
+    <div id="8">8</div>
+    <div id="9">9</div>
+    <div id="10">10</div>
+</div>
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="public/js/demo.js"></script>
+    <script type="text/javascript" src="public/js/helper.js"></script>
+   
+
     <script>
+       
 // جلوگیری از تداخل جی کویری با کتابخانه های دیگری که از علامت مشابه $ استفاده میکنند با دو خط پایین
     // $.noConflict();
     // jQuery(document).ready(function($){
@@ -262,7 +293,7 @@
 
                             warning1.style.display = "block";
                             
-                            addHtmlElement(response.arrayres ,response.changeid);
+                            addHtmlElement(response.contactName ,response.contactid);
                         }
                     },
                     error: function(response) {
@@ -298,11 +329,9 @@
         function addContact(res) {
             $("#bodyside ").children().empty();
             for (let i = 0; i < res.length; i++) {
-
-                addHtmlElement(res[i]['name'],res[i]['contactid']);
-
-            }
-        };
+                    addHtmlElement(res[i]['name'],res[i]['contactid']);
+              }
+        }
         //change_contact_data-----------------------------------------------------------------------------------------------------------------
 // نام جدید مخاطب را گرفته و در لیست مخاطبین و هدر کانتینر و در جدول کانتکت انرا تغییر می دهد
         $("#changeName").click(function() {
@@ -312,11 +341,12 @@
             } else {
                 var changename=$("#newName").val();
 
-                $("li.active").children("p.name").text(changename);
+                $("li.active").children("p").text(changename);
                 $("#changeNam1").text(changename);
                 // شروع : تغییر دادن در جدول مخاطبین 
                 // console.log($("li.active").children("p.id").text());
-               var changenametable= $("li.active").children("p.id").text();
+                var changenametable=$("#hiddeninput").val();
+            //    var changenametable= $("li.active").attr("data-id");
           
                 $.ajax({
                 url: "<?= URL; ?>index/change_contact_data",
@@ -339,39 +369,96 @@
                 document.getElementById("modalChange").style.display = 'none';
             }
         });
- // مخاطب را در ساید بار به نمایش در می اورد
- function addHtmlElement($name ,$changeid) {
-var i=j=0;
-    // alert($name +$changeid);
-            var item = '<p class="id">' + $changeid + '</p><p class="name">' + $name + '</p><button class="aclass" ><i class="fa fa-edit aclass" id="edit"  onclick=edit()></i> </button>';
-            var li = $("<li ></li>").html(item);
-            // $("#bodyside ").children().append(li);
-            $("#contact").append(li);
-            $("li").addClass("liclass");
-             $("li").children("p.id").hide();
-            $("#modalAdd").css("display", "none");
-            //فعال کردن یک مخاطب با کلیک کردن  بر روی ان وباز کردن صفحه چت با این مخاطب######################
-        // ##########################################################################################
-            $("li").click(function() { 
-                i++;
-             
-                $(this).addClass("active").css({opacity: 0.7}).siblings().removeClass("active");
-                var Nam =$(".active").children("p.name").text();
-                $("#changeNam1").text(Nam );
-                          
-                // start  
+       
+        var isHiddenInputCreated = false;
 
-                // alert($(".active p.id").text());
-                var contactid=$(".active").children().first().text();
-                j++;
-               console.log(Nam+"  " +contactid+"  "+"i="+i+"   "+"j="+j);
-                // فرستادن اطلاعات کانتکت و متن پیام ارسالی برای ثبت در جدول مسیج
-                var isMessageSent = false;// فرستادن اطلاعات کانتکت و متن پیام ارسالی برای ثبت در جدول مسیج
+function addHtmlElement($name, $contactid) {
+    // ساختن یک input از نوع hidden
+       if (!isHiddenInputCreated) {
+          $("<input>").attr("type", "hidden").attr("id", "hiddeninput").appendTo("body");
+          isHiddenInputCreated = true;
+        }
+
+    var li = $("<li>").attr("data-id", $contactid).attr("class", "liclass");
+    var buttonHTML = '<p>' + $name + '</p><button class="aclass"><i class="fa fa-edit aclass" id="edit" onclick="edit()"></i></button>';
+    li.html(buttonHTML);
+    $("#contact").append(li);
+    $("#modalAdd").css("display", "none");
+}
+// srart پنج شنبه &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+$("#contact").on("click", "li", function() {
+    $(this).addClass("active").siblings().removeClass("active");
+    var Nam = $(".active").children("p").text();
+    $("#changeNam1").text(Nam);
+    var contactid = $(this).attr("data-id");
+    $("#hiddeninput").val(contactid);
+    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    $("#msg-card_body").empty();
+    $("#msg-card_body").children().empty();
+    $.ajax({
+        url:"<?=URL;?>index/viewchat",
+        type:"POST",
+        data:{
+                "contactid":contactid
+            },
+            success: function(response) {
+                                     response = JSON.parse(response);
+                                     
+                                     viewChatfunc(  response.arrayMessages,response.userid,response.contactid);
+                                                 
+                                       },
+                      error: function(response) {
+                                     alert("خطای 500");
+                                     }
+    });
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+});
+
+function viewChatfunc(arrayMessages, userid, contactid) {
+
+try{  
+    $.each(arrayMessages, function(index, message) {
+        var id=message.id;
+        var sendId = message.sendId;
+        var text = message.text;
+        var date = message.date;
+        console.log(id+"  "+sendId + "  " + text+"  "+date);
+        var div = $("<div>").attr("class", "boxchat " ).attr("id", id);  
+     var item = '<div class="message">' +' <pre>'+text+'</pre>' + '</div><div class="time">' + date + '</div>';
+     $(div).html(item); 
+    $("#msg-card_body").append($(div));
+  
+    if (sendId == userid) {
+        $(div).addClass("left");
+    } else if (sendId == contactid) {
+        $(div).addClass("right");
+    }
+                });
+} catch (exception) {
+      console.error("606");
+}   
+}                          
+                  
+// self::jalali_date("Y/m/d")
+// self::jalali_date("h/i/s")    
+
+// function funcRight(boxMessage){
+//     // استایلی بده تاdiv ایجاد شده سمت راست صفحه قرار بگیرد
+//     console.log("funcRig");
+// }   
+// function funcLeft(boxMessage){
+//     // استایلی بده که divایجاد شده سمت چپ صفحه قرار بگیرد
+//     console.log("funcLef");
+// }   
+
+            //    var isMessageSent = false;// فرستادن اطلاعات کانتکت و متن پیام ارسالی برای ثبت در جدول مسیج
                 $("#sendMessage").click( function() {
-                    if (!isMessageSent) {
-                       var message = $("#message").val();
-                       var contactid=$(".active").children().first().text();
-                      i++;
+                    
+                    var message = $("#message").val();
+                    var contactid=   $("#hiddeninput").val();
+                   
+                    
                // نمایش محتوای اولین فرزند داخل یک المان li
                $.ajax({
                       url: "<?=URL;?>index/chat",
@@ -384,24 +471,34 @@ var i=j=0;
                                                         response = JSON.parse(response);
                                                         if (response.msg == "ok") {
                                                             alert("message added successfuly");
-                                                            isMessageSent = true;
-								                               }
-                                                           
+                                                            // isMessageSent = true;
                                                           
-                                                        
+								                               }
+                                                             
+                                                          $("#message").val("");
 
                                                    },
                       error: function(response) {
                                                         alert("خطای 500");
                                                  }
                      });
-                    };
-                });
+                    });
+           
                     
-            });
-    };
+ 
+        
+    
 
     
+    function edit( event,element) {
+    document.getElementById("newName").value = "";
+            document.getElementById("warning2").style.display = "block";
+            document.getElementById("modalChange").style.display = 'block'; 
+        //     var dataIdValue = $(element).closest("li").attr("data-id");
+        //    var hiddenInput = $("<input>").attr("type", "hidden").attr("id", "hiddeninput").val(dataIdValue);
+        //     $("#modalChange").append(hiddenInput);
+   
+       }
 
 
 // مودال اضافه کردن مخاطب را پنهان میکند
@@ -413,24 +510,8 @@ var i=j=0;
         document.getElementById('close1').onclick = function closemodalChange() {
             document.getElementById('modalChange').style.display = 'none';
         };
-
-
-// با زدن دکمه ادیت فیلد نام خالی میشود و مودال نمایش داده میشود
-        function edit() {
-            document.getElementById("newName").value = "";
-            document.getElementById("warning2").style.display = "block";
-            document.getElementById("modalChange").style.display = 'block';
-
-        };
-
        
-
-      
-
-
-        
-
-    </script>
+  </script>
 </body>
 
 </html>
