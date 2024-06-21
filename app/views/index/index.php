@@ -20,12 +20,7 @@
     <style>
         .active{
 		background-color:rgba(45, 43, 84,0.3);
-    }
-    .x{
-    }
-    .y{
-        
-    }
+    
     
     </style>
 </head>
@@ -149,7 +144,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="input-group">
- <!--######################## sendMessage######################## -->
+
 
                             <div class="input-group-append " id="sendMessage" >
                                 <span class="input-group-text send_btn "><i class="fas fa-location-arrow "></i></span>
@@ -194,18 +189,6 @@
 
 
 
-    <div id="t">
-    <div id="1">1</div>
-    <div id="2">2</div>
-    <div id="3">3</div>
-    <div id="4">4</div>
-    <div id="5">5</div>
-    <div id="6">6</div>
-    <div id="7">7</div>
-    <div id="8">8</div>
-    <div id="9">9</div>
-    <div id="10">10</div>
-</div>
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="public/js/demo.js"></script>
