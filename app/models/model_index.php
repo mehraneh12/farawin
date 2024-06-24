@@ -159,4 +159,33 @@ if (sizeof($arrayMessages) > 0) {
      
    
 }
+
+
+function del($post){
+
+   $contactid = $post['contactid'];
+   $userid=$_SESSION['id'];
+   echo( $contactid);
+   
+   $sql = " DELETE FROM message WHERE (sendId=? AND getId=?) OR ( sendId=? AND getId=? )";
+   $params = array($userid, $contactid,$contactid,$userid);
+   $this->doQuery($sql,  $params);
+
+
+   $sql = " DELETE FROM contact WHERE contactid=?";
+   $params = array($contactid);
+    $this->doQuery($sql,  $params);
+
+    $sql = " DELETE FROM users WHERE id=?";
+   $params = array($contactid);
+   $this->doQuery($sql,  $params);
+   echo json_encode(
+      array(
+         "msg" => "ok"
+         
+      )
+   );
+
+
+}
 }

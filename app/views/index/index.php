@@ -20,8 +20,7 @@
     <style>
         .active{
 		background-color:rgba(45, 43, 84,0.3);
-    
-    
+    }
     </style>
 </head>
 
@@ -60,7 +59,7 @@
                             </div> -->
                             <div class="user_info">
                                 <span id="changeNam1"></span>
-                                <!-- <p></p> -->
+                                <button class="aclass left1 " onclick="del()" id="but"></button>
                             </div>
                             <!-- <div class="video_cam">
                                 <span><i class="fas fa-video"></i></span>
@@ -296,7 +295,6 @@
                 data: {},
                 success: function(response) {
                     response = JSON.parse(response);
-
                     addContact(response.res);
                 },
                 error: function(response) {
@@ -307,7 +305,7 @@
 
         });
 
-        //addHtmlElement------------------------------------------------------------------------------
+        //addcontact------------------------------------------------------------------------------
         // مخاطبین را تک به تک به تابع اد اچ تی ام ال میفرستد تا در نوار ساید بار به نمایش در بیایند
         function addContact(res) {
             $("#bodyside ").children().empty();
@@ -352,30 +350,33 @@
                 document.getElementById("modalChange").style.display = 'none';
             }
         });
-       
-        var isHiddenInputCreated = false;
 
+
+
+//نام مخاطب را میگیرد و ان را در ساید بار به نمایش در می اورد
+var isHiddenInputCreated = false;
 function addHtmlElement($name, $contactid) {
-    // ساختن یک input از نوع hidden
+    // ساختن یک اینپوت از نوع مخفی
        if (!isHiddenInputCreated) {
           $("<input>").attr("type", "hidden").attr("id", "hiddeninput").appendTo("body");
           isHiddenInputCreated = true;
         }
 
     var li = $("<li>").attr("data-id", $contactid).attr("class", "liclass");
-    var buttonHTML = '<p>' + $name + '</p><button class="aclass"><i class="fa fa-edit aclass" id="edit" onclick="edit()"></i></button>';
+    var buttonHTML = '<p>' + $name + '</p><button class="aclass left1"><i class="fa fa-edit  aclass" id="edit" onclick="edit()"></i></button>';
     li.html(buttonHTML);
     $("#contact").append(li);
     $("#modalAdd").css("display", "none");
 }
-// srart پنج شنبه &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
 $("#contact").on("click", "li", function() {
     $(this).addClass("active").siblings().removeClass("active");
     var Nam = $(".active").children("p").text();
     $("#changeNam1").text(Nam);
+    var ihtml='<i class="fa fa-trash  aclass"  ></i>';
+    $("#but").html(ihtml);
     var contactid = $(this).attr("data-id");
     $("#hiddeninput").val(contactid);
-    // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     $("#msg-card_body").empty();
     $("#msg-card_body").children().empty();
     $.ajax({
@@ -394,7 +395,7 @@ $("#contact").on("click", "li", function() {
                                      alert("خطای 500");
                                      }
     });
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
     
 });
 
@@ -493,6 +494,29 @@ try{
         document.getElementById('close1').onclick = function closemodalChange() {
             document.getElementById('modalChange').style.display = 'none';
         };
+
+
+
+      function del(){
+        var contactid=$("#hiddeninput").val();   alert(contactid);
+        $.ajax({
+        url:"<?=URL;?>index/del",
+        type:"POST",
+        data:{
+                "contactid":contactid
+            },
+            success: function(response) {
+                    response = JSON.parse(response);
+                    if (response.msg == "ok") {
+                           alert("delet of table was succesfully");
+                }
+                    
+                },
+                      error: function(response) {
+                                                        alert("خطای 500");
+                                                 }
+                     });
+      }
        
   </script>
 </body>

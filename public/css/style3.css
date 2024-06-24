@@ -302,7 +302,7 @@ cursor: pointer;border-radius: 15px;outline: none;
 }
 .liclass {
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	flex-direction: row;
 	width: 40px;
 	height: 30px;
@@ -331,17 +331,19 @@ margin-bottom: 5px;
 }
 
 .left {
-    align-self: flex-start;
+    align-self: flex-start  ;
 background-color: #cfe3d3;
 }
 
 .right {
     align-self: flex-end;
 }
+.left1{  align-self: flex-start;}
 
 
-
-
+.user_info{display: flex; 
+	justify-content: space-between;
+	flex-direction: row;}
 
 .time{
 	font-size:9px;
@@ -351,11 +353,11 @@ width:100% ;
 align-items: end baseline;}
 
 
-.aclass {
+.aclass { align-self: flex-end;
 	background: unset;
 	border: 0;
 
-	font-size: 20px;
+	/* font-size:20px; */
 	color: white;
 	cursor: pointer;
 
@@ -370,6 +372,11 @@ p {
 	margin-bottom: 0px;
 }
 
+/* 
+ 
+#but{ align-self: flex-end;color:red;
+	align-self: flex-start;
+} */
 
 ::-webkit-scrollbar {
 	width: 10px;
@@ -401,10 +408,6 @@ p {
 		margin-bottom: 15px !important;
 	}
 }
-
-
-
-
 
 
 
