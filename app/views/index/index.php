@@ -21,7 +21,7 @@
         .active{
 		background-color:rgba(45, 43, 84,0.3);
     }
-    /* nnnnnnnnnnn */
+    
     </style>
 </head>
 
@@ -54,20 +54,14 @@
                 <div class="card">
                     <div class="card-header msg_head">
                         <div class="d-flex bd-highlight">
-                            <!-- <div class="img_cont">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
-                                <span class="online_icon"></span>
-                            </div> -->
+                           
                             <div class="user_info">
                                 <span id="changeNam1"></span>
                                 <button class="aclass left1 " onclick="del()" id="but"></button>
                             </div>
-                            <!-- <div class="video_cam">
-                                <span><i class="fas fa-video"></i></span>
-                                <span><i class="fas fa-phone"></i></span>
-                            </div> -->
+                           
                         </div>
-                        <!-- <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span> -->
+                        
                         <div class="action_menu">
                             <ul>
                                 <li><i class="fas fa-user-circle"></i> View profile</li>
@@ -79,67 +73,25 @@
                     </div>
                     <div class="card-body msg_card_body" id="msg-card_body">
                         <div class="d-flex justify-content-start mb-4">
-                            <!-- <div class="img_cont_msg">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                            </div>
-                            <div class="msg_cotainer">
-                                Hi, how are you samim?
-                                <span class="msg_time">8:40 AM, Today</span>
-                            </div> -->
+                         
                         </div>
                         <div class="d-flex justify-content-end mb-4">
-                            <!-- <div class="msg_cotainer_send">
-                                Hi Khalid i am good tnx how about you?
-                                <span class="msg_time_send">8:55 AM, Today</span>
-                            </div>
-                            <div class="img_cont_msg">
-                                <img src="https://avatars.hsoubcdn.com/ed57f9e6329993084a436b89498b6088?s=256" class="rounded-circle user_img_msg"> 
-                            </div> -->
+                            
                         </div>
                         <div class="d-flex justify-content-start mb-4">
-                            <!-- <div class="img_cont_msg">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                            </div>
-                            <div class="msg_cotainer">
-                                I am good too, thank you for your chat template
-                                <span class="msg_time">9:00 AM, Today</span>
-                            </div> -->
+                           
                         </div>
                         <div class="d-flex justify-content-end mb-4">
-                            <!-- <div class="msg_cotainer_send">
-                                You are welcome
-                                <span class="msg_time_send">9:05 AM, Today</span>
-                            </div>
-                            <div class="img_cont_msg"> -->
-                                <!-- <img src="https://avatars.hsoubcdn.com/ed57f9e6329993084a436b89498b6088?s=256" class="rounded-circle user_img_msg"> -->
-                            <!-- </div> -->
+                            
                         </div>
                         <div class="d-flex justify-content-start mb-4">
-                            <!-- <div class="img_cont_msg">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                            </div>
-                            <div class="msg_cotainer">
-                                I am looking for your next templates
-                                <span class="msg_time">9:07 AM, Today</span>
-                            </div> -->
+                          
                         </div>
                         <div class="d-flex justify-content-end mb-4">
-                            <!-- <div class="msg_cotainer_send">
-                                Ok, thank you have a good day
-                                <span class="msg_time_send">9:10 AM, Today</span>
-                            </div>
-                            <div class="img_cont_msg">
-                                <img src="https://avatars.hsoubcdn.com/ed57f9e6329993084a436b89498b6088?s=256" class="rounded-circle user_img_msg">
-                            </div> -->
+                          
                         </div>
                         <div class="d-flex justify-content-start mb-4">
-                            <!-- <div class="img_cont_msg">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                            </div>
-                            <div class="msg_cotainer">
-                                Bye, see you
-                                <span class="msg_time">9:12 AM, Today</span>
-                            </div> -->
+                           
                         </div>
                     </div>
                     <div class="card-footer">
@@ -326,9 +278,8 @@
                 $("li.active").children("p").text(changename);
                 $("#changeNam1").text(changename);
                 // شروع : تغییر دادن در جدول مخاطبین 
-                // console.log($("li.active").children("p.id").text());
+               
                 var changenametable=$("#hiddeninput").val();
-            //    var changenametable= $("li.active").attr("data-id");
           
                 $.ajax({
                 url: "<?= URL; ?>index/change_contact_data",
@@ -399,7 +350,7 @@ $("#contact").on("click", "li", function() {
 
     
 });
-
+// چت های بین مخاطب و فرد لاگین کننده را به نمایش میگذارد
 function viewChatfunc(arrayMessages, userid, contactid) {
 
 try{  
@@ -475,14 +426,11 @@ try{
     
 
     
-    function edit( event,element) {
+    function edit( ) {
     document.getElementById("newName").value = "";
             document.getElementById("warning2").style.display = "block";
             document.getElementById("modalChange").style.display = 'block'; 
-        //     var dataIdValue = $(element).closest("li").attr("data-id");
-        //    var hiddenInput = $("<input>").attr("type", "hidden").attr("id", "hiddeninput").val(dataIdValue);
-        //     $("#modalChange").append(hiddenInput);
-   
+      
        }
 
 
