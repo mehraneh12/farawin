@@ -48,8 +48,4 @@ class Index extends Controller
     
         $this->model->viewchat($_POST);
     }
-    function del(){
-    
-        $this->model->del($_POST);
-    }
 }
