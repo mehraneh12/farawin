@@ -115,11 +115,17 @@ ul{padding:5px;margin:0px;}
     padding: 4px;
 }
 .chatboxright{display:flex;align-items: center !important;padding:5px;background: #c7d7d545;flex-direction:column;width: 60%;margin-bottom:5px;}
+
 .chatboxleft{display:flex;align-items: center !important;padding:5px;float:left;flex-direction:column;background: #c7d7d545;width:20%;}
+
 .time{font-size:9px;}
+
 .fa-send{font-size:22px;}
-.fa-plus ,.fa-refresh ,.edite2{font-size: 22px;margin: 0px 5px;}
+
+.fa-plus ,.fa-refresh ,.edite2{font-size: 22px;    margin: -4px 2px;}
+
 i:hover , li:hover{cursor: pointer;}
+
 #modalAdd,#modalChange{
 	display: none;
 	background-color: rgba(0,0,0,0.3);
@@ -254,3 +260,5 @@ p {color:rgb(120, 119, 119);
 	margin-bottom: 0px;
 }
 #contact{overflow:auto;}
+
+.del{font-size: 20px !important;margin:0px 12px  !important;}

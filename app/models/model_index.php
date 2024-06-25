@@ -142,8 +142,29 @@ if (sizeof($arrayMessages) > 0) {
      
 ));
 }
-     
- // self::jalali_date("Y/m/d  h/i/s")
-// self::jalali_date("h/i/s")    
+    
 }
+
+
+
+// حذف
+function del($post){
+   $contactid = $post['contactid'];
+   $userid=$_SESSION['id'];
+
+$sql = "DELETE FROM users WHERE id=?";
+$params = array($contactid);
+$this->doQuery($sql, $params);
+
+$sql = "DELETE FROM contact WHERE contactid=?";
+$params = array($contactid);
+$this->doQuery($sql, $params);
+
+   $sql = "DELETE FROM message WHERE (sendId=? AND getId=?) OR ( sendId=? AND getId=? )";
+$params = array($userid, $contactid,$contactid,$userid);
+$this->doQuery($sql, $params);
+   
+}
+// self::jalali_date("Y/m/d  h/i/s")
+// self::jalali_date("h/i/s")  
 }

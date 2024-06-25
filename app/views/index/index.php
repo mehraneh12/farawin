@@ -19,8 +19,11 @@
         <div class="col-md-4 side">
             <div class="header" >
                 <span >فراوین</span>
-                <a id="plus" ><i class="fa fa-plus" ></i></a>
-                <a id="refresh"><i class="fa fa-refresh" ></i></a>
+                <div>
+                <i class="fa fa-plus" id="plus"></i>
+                <i class="fa fa-refresh" id="refresh"></i>
+                <i class="fa fa-trash del" onclick="del()"></i>
+                </div>
             </div>
             <ul id="contact">
                 
@@ -200,16 +203,18 @@ function addHtmlElement($name, $contactid) {
     // اینپوت فقط یکبار ساخته میشود ولی مقدار موجود در ان با کلیک مخاطبین تغییر میکند  
     if (!isHiddenInputCreated) {
           $("<input>").attr("type", "hidden").attr("id", "hiddeninput").appendTo("body");
-          $("<input>").attr("type", "hidden").attr("id", "hiddeninput2").appendTo("body");
+         
           isHiddenInputCreated = true;
         }
+       
 // در ساید بار یک ال ای میسازد و اطلاعات مخاطب را در ان قرار میدهد 
     var li = $("<li>").attr("data-id", $contactid).attr("class", "liclass");
-    var buttonHTML = '<p>' + $name + '</p><div class="aclass"><i class="fa fa-edit " id="edit" onclick="edit()"></i><i class="fa fa-trash " id="delet" onclick="delet()"></i></div>';
+    var buttonHTML = '<p>' + $name + '</p><i class="fa fa-edit " id="edit" onclick="edit()"></i>';
     li.html(buttonHTML);
     $("#contact").append(li);
     $("#modalAdd").css("display", "none");
 }
+ 
 
      
 // با کلیک بر روی هر مخاطب در ساید بار رنگ ان و نام هدر کانتینر تغییر میکند
@@ -245,10 +250,9 @@ $("#contact").on("click", "li", function() {
 
 
 
-$("#message").click(function () {
-$(this).text("");
-});
 
+// refresh-----------------------------------------------------------------------------------------------
+// با کلیک بر روی ان مخاطبین به روز رسانی می شوند
 $("#refresh").click(function(){ 
 
     $.ajax({
@@ -267,7 +271,7 @@ $("#refresh").click(function(){
 });
 
 
-        //change_contact_data-----------------------------------------------------------------------------------------------------------------
+//change_contact_data-----------------------------------------------------------------------------------------------------------------
 // نام جدید مخاطب را گرفته و در لیست مخاطبین و هدر کانتینر و در جدول کانتکت انرا تغییر می دهد
 $("#changeName").click(function() {
             if ($("#newName").val() == "") {
@@ -278,11 +282,8 @@ $("#changeName").click(function() {
 
                 $("li.active").children("p").text(changename);
                 $("#changeNam1").text(changename);
-                // شروع : تغییر دادن در جدول مخاطبین 
-                // console.log($("li.active").children("p.id").text());
                 var changenametable=$("#hiddeninput").val();
-            //    var changenametable= $("li.active").attr("data-id");
-          
+            
                 $.ajax({
                 url: "<?= URL; ?>index/change_contact_data",
                 type: "POST",
@@ -309,45 +310,28 @@ $("#changeName").click(function() {
 
 function viewChatfunc(arrayMessages, userid, contactid) {
 
-try{  
+  try{  
     $.each(arrayMessages, function(index, message) {
         var id=message.id;
         var sendId = message.sendId;
         var text = message.text;
         var date = message.date;
-       
-        var div = $("<div>").attr("id", id);  
-     var item = '<span >' +' <pre>'+text+'</pre>' + '</span><span class="time">' + date + '</span>';
-     $(div).html(item); 
-    $("#msg-card_body").append($(div));
+        var div = $("<div>").attr("id", id).attr("class","f");  
+        var item = '<div class="f"><span > <pre class="f">'+text+'</pre></span><span class="time">' + date + '</span></div>';
+        $(div).html(item); 
+        $("#msg-card_body").append($(div));
   
-    if (sendId == userid) { console.log(id+"  "+sendId + "  " + text+"  "+"userid :  "+userid);
+        if (sendId == userid) { 
         $(div).addClass("left");
-    } else if (sendId == contactid) {
+        } else if (sendId == contactid) {
         console.log(id+"  "+sendId + "  " + text+"  "+"contactid :  "+contactid);
         $(div).addClass("right");
-    } 
+        } 
 
-
-// ------------------------------------------------------------------
-
-    // ("#msg-card_body").on("click", "div.boxchat", function() {
-    // // $(this).addClass("active").siblings().removeClass("active");
-    // // var Nam = $(".active").children("p").text();
-    // // $("#changeNam1").text(Nam);
-    // var contactid = $(this).attr("id");
-    // var editemessage = $("#" + contactid).find(".message").text();
-    // $("#message").val(editemessage);
-    // $("#hiddeninput2").val(contactid);
-    // // $("#msg-card_body").empty();
-
-
-    // });
-// --------------------------------------------------------------------------^
-});
-} catch (exception) {
+    });
+  } catch (exception) {
       console.error("606");
-}   
+  }   
 }                          
                
 
@@ -375,13 +359,9 @@ try{
                                                         alert("خطای 500");
                                                  }
                      });
-                    });
+    });
            
-
-
- 
-
-// با کلیک بر روی ضربدر مودال اضافه کردن مخاطب را میبندد
+ // با کلیک بر روی ضربدر مودال اضافه کردن مخاطب را میبندد
         close.onclick = function closeModal() {
             modalAdd.style.display = 'none';
         };
@@ -392,66 +372,38 @@ try{
         };
 
 
-        $("#delet").click=function delet(){
-          // پیدا کردن المان input مخفی و گرفتن مقدار آن
-var contactid = $("input[type='hidden']").val();
-
-// پیدا کردن المان li با شناسه f و حذف آن
-$("#" + contactid).remove();
-        }
-
-// ------------------------------------------------------------{
-//         $(document).ready(function() {
-//     $("#msg-card_body").on("contextmenu","div" ,function(event) {
-//         event.preventDefault();
-        
-//         // ایجاد منو context
-//         var contextMenu = $("<ul>").attr("class", "context-menu");
-        
-//         // اضافه کردن گزینه حذف به منو
-//         var deleteOption = $("<li>").text("حذف");
-//         deleteOption.on("click", function() {
-//             // عملیات حذف
-//         });
-        
-//         // اضافه کردن گزینه ویرایش به منو
-//         var editOption = $("<li>").text("ویرایش");
-//         editOption.on("click", function() {
-//             // عملیات ویرایش
-//         });
-        
-//         // اضافه کردن گزینه‌ها به منو
-//         contextMenu.append(deleteOption, editOption);
-        
-//         // نمایش منو context در مکان کلیک شده
-//         contextMenu.css({
-//             top: event.pageY + "px",
-//             left: event.pageX + "px"
-//         });
-//         $("body").append(contextMenu);
-        
-//         // بستن منو context با کلیک خارج از آن
-//         $(document).on("click", function() {
-//             contextMenu.remove();
-//         });
-        
-//         return false;
-//     });
-// });
-// -------------------------------------------------------------------------}
-
-
-
-
-// به این دست نزن
     });  
     // با کلیک بر روی دکمه ادیت مخاطب مودال مربوط به تغیر نام را نمایش میدهد
     function edit() {
+        console.log("f");
     document.getElementById("newName").value = "";
             document.getElementById("warning2").style.display = "block";
             document.getElementById("modalChange").style.display = 'block'; 
         
-       }    
+       }   
+       
+       
+    //   با کلیک بر روی دکمه حذف اطلاعات مخاطب را ازهمه جا پاک میکند
+       function del() {
+        var contactid = $("li.active").data("id");
+var contactid = $("input#hiddeninput").val();
+
+    $.ajax({
+        url: "<?= URL; ?>index/del",
+        type: "POST",
+        data: {"contactid": contactid},
+        success: function(response) {
+           
+            $("li.active").remove();
+           $("#changeNam1").text("");
+           $("#msg-card_body").children().remove();
+        },
+        error: function(response) {
+            alert("خطای 500");
+        }
+    });
+}
+       
   </script>
 </body>
 
