@@ -112,7 +112,7 @@ class model_index extends Model
 $message = $post['message'];
 $contactid = $post['contactid'];
       $sql = "INSERT INTO message (sendId, getId, text,date) VALUES (?, ?, ?,?)";
-      $values = array($_SESSION['id'], $contactid, $message,self::jalali_date("  H:i")); 
+      $values = array($_SESSION['id'], $contactid, $message,self::jalali_date("Y/m/d  h:i:s")); 
       $this->doQuery($sql, $values);
 
 
@@ -133,6 +133,7 @@ function viewchat($post){
    $sql = "SELECT * FROM message WHERE (sendId=? AND getId=?) OR ( sendId=? AND getId=? )";
 $params = array($userid, $contactid,$contactid,$userid);
 $arrayMessages = $this->doSelect($sql, $params);
+// file_put_contents("meh.json",print_r( $arrayMessages,true));
 if (sizeof($arrayMessages) > 0) {
    echo json_encode(
       array(
@@ -165,6 +166,46 @@ $params = array($userid, $contactid,$contactid,$userid);
 $this->doQuery($sql, $params);
    
 }
-// self::jalali_date("Y/m/d  h/i/s")
-// self::jalali_date("h/i/s")  
+
+
+
+
+
+
+
+function editchat($post){
+   $contactid = $post['contactid'];
+   $sql = "UPDATE message SET text=? where id=$contactid";
+   $values = array($post['message']);
+   $this->doQuery($sql, $values); 
+
+   
+   $sql = "SELECT id,text FROM message WHERE id=?";
+$params = array($contactid);
+$arrayMessages = $this->doSelect($sql, $params);
+file_put_contents("meh.json",print_r( $arrayMessages,true));
+   echo json_encode(
+      array(
+         "id"=>$arrayMessages[0]['id'],
+        "text"=> $arrayMessages[0]['text']
+));
+}
+
+
+
+function delchat($post){
+$id = $post['id'];
+$sql = "DELETE FROM message WHERE id=? ";
+$params = array($id);
+$this->doQuery($sql, $params);
+echo json_encode(
+   array(
+      "id"=>$id
+   
+)); 
+}
+
+
+// self::jalali_date("Y/m/d  h:i:s")
+// self::jalali_date("h:i:s")  
 }

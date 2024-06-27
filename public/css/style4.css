@@ -159,7 +159,7 @@ i:hover , li:hover{cursor: pointer;}
     border-radius: 50%;
     font-size: 22px;
 }
-.content{
+.content {
 	border-radius: 15px;
 	background-color:rgb(73 66 66); 
 
@@ -169,6 +169,18 @@ i:hover , li:hover{cursor: pointer;}
    padding: 5%;
 	text-align: center;
 }
+.custom-context-menu{
+    /* border-radius: 15px; */
+	background-color:rgb(227, 226, 226); 
+color:#0428f4;
+	/* margin: 15% auto; */
+	width: 20%;
+	/* border-radius: 10px; */
+   padding: 5px;
+	text-align: center;
+}
+
+
 .contact{ border-radius: 10px;padding: 8px;width:80%;background-color:rgb(233 228 228 / 0%);color:#ebe5e5;
 margin: 3%;  text-align: center;border: 1px solid rgb(4 226 240);border-radius: 15px;
 
@@ -210,35 +222,36 @@ margin-bottom: 5px;
     flex-direction: column;
     overflow:auto;
 }
-
-.left {
-    align-self: flex-end;
-    width: 40%;
+.chatdiv{ width: 40%;
     margin-bottom: 5px;
-background-color: #e5eaea;
+display: flex;
+flex-direction: column;
 padding: 5px;
-border-radius: 5px;
-}
-
+border-radius: 5px;}
 .right {
     align-self: flex-start;
-    width: 40%;
-    margin-bottom: 5px;
-background-color: #f1f3f3;
-padding: 5px;
-border-radius: 5px;
+     background-color:#b3c7c7;
+
+}
+.left {
+    align-self: flex-end;
+    background-color: #e5eaea;
 }
 
 
 
 
 
-.time{
+
+
+.time{ 
+    /* align-self: flex-start; */
 	font-size:9px;
+    /* background-color: yellow; */
 color:gray;
 
 width:100% ;
-align-items: end baseline;}
+/* align-items: end baseline;} */
 
 
 .aclass {
@@ -262,3 +275,7 @@ p {color:rgb(120, 119, 119);
 #contact{overflow:auto;}
 
 .del{font-size: 20px !important;margin:0px 12px  !important;}
+/* .q1{background-color: red;
+border-radius: 0px;
+width: 100%;}
+.m{background-color: green;}.m1{background-color: pink;} */

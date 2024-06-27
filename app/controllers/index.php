@@ -52,4 +52,14 @@ class Index extends Controller
     
         $this->model->del($_POST);
     }
+    
+    function editchat(){
+    
+        $this->model->editchat($_POST);
+    }
+   
+    function  delchat(){
+    
+        $this->model->delchat($_POST);
+    }
 }
